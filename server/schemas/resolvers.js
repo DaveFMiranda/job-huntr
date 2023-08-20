@@ -37,19 +37,34 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError('User not found');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError('Incorrect password');
       }
 
       const token = signToken(user);
 
       return { token, user };
     },
+
+    addJob: async (parent, { company, role, advertisedSalary, offer }) => {
+      const job = await Job.create({ company, role, advertisedSalary, offer });
+      return job;
+    },
+    updateJob: async (parent, { _id, company, role, offer }) => {
+      const job = await Job.findOneAndUpdate(
+        {_id: _id },
+        { company, role, offer },
+      );
+      return job;
+    },
+  },
+};
+
     // addThought: async (parent, { thoughtText }, context) => {
     //   if (context.user) {
     //     const thought = await Thought.create({
@@ -117,7 +132,6 @@ const resolvers = {
     //   }
     //   throw AuthenticationError;
     // },
-  },
-};
+
 
 module.exports = resolvers;

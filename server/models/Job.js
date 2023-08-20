@@ -1,6 +1,15 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const schema = Schema({
+  createdAt: Number,
+  updatedAt: Number,
+  name: String
+}, {
+  // Make Mongoose use Unix time (seconds since Jan 1, 1970)
+  timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
+});
+
 const jobSchema = new Schema({
   company: {
     type: String,
@@ -36,11 +45,10 @@ offer: {
   type: Boolean,
 },
 
-timeStamp:{
-
-}
-
+timestamps: true 
+// This option adds createdAt and updatedAt fields
 });
+
 
 const Job = model('Job', jobSchema);
 
