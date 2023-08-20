@@ -25,6 +25,12 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    jobs: async () => {
+      return Job.find();
+    },                   
+    job: async (parent, { _id }) => {
+      return Job.findOne({ _id });
+
   },
 
   Mutation: {
