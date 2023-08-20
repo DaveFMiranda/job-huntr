@@ -57,7 +57,7 @@ const resolvers = {
     },
     updateJob: async (parent, { _id, company, role, offer }) => {
       const job = await Job.findOneAndUpdate(
-        {_id: _id },
+        {_id },
         { company, role, offer },
       );
       return job;
