@@ -1,6 +1,6 @@
 const db = require('../config/connection');
 // TO DO: add all models to line 3
-const { User } = require('../models');
+const { User, Job } = require('../models');
 const userSeeds = require('./userSeeds.json');
 // const thoughtSeeds = require('./thoughtSeeds.json');
 const cleanDB = require('./cleanDB');

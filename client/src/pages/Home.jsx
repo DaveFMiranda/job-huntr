@@ -1,17 +1,20 @@
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+
 
 import ThoughtList from '../components/ThoughtList';
 import ThoughtForm from '../components/ThoughtForm';
 
 import { QUERY_THOUGHTS } from '../utils/queries';
 
+
 const Home = () => {
-  // const { loading, data } = useQuery(QUERY_THOUGHTS);
-  // const thoughts = data?.thoughts || [];
+ 
+
 
   return (
     <main>
-      <p>HEY LET'S PUT SOME CONTENT HERE!!!</p>
+      <p>HEY LET'S PUT SOME CONTENT HERE!!! tweak</p>
       <div className="flex-row justify-center">
         <div
           className="col-12 col-md-10 mb-3 p-3"

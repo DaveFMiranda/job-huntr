@@ -19,12 +19,19 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  // thoughts: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Thought',
-  //   },
-  // ],
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+
+  savedJobs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Job'
+    }
+    ]
 });
 
 userSchema.pre('save', async function (next) {

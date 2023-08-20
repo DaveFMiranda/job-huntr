@@ -1,5 +1,5 @@
-const { User } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User, Job, Contact } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -18,15 +18,32 @@ const resolvers = {
     // },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne(
+          { _id: context.user._id }//populate(savedJobs) //
+        );
       }
       throw AuthenticationError;
+    },
+    jobs: async () => {
+      return Job.find();
+    },
+    job: async (parent, { _id }) => {
+      return Job.findOne({ _id });
     },
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (
+      parent,
+      { username, email, password, firstName, lastName }
+    ) => {
+      const user = await User.create({
+        username,
+        email,
+        password,
+        firstName,
+        lastName,
+      });
       const token = signToken(user);
       return { token, user };
     },
@@ -47,23 +64,30 @@ const resolvers = {
 
       return { token, user };
     },
-    // addThought: async (parent, { thoughtText }, context) => {
-    //   if (context.user) {
-    //     const thought = await Thought.create({
-    //       thoughtText,
-    //       thoughtAuthor: context.user.username,
-    //     });
+    addJob: async (parent, { company,
+      role,
+      advertisedSalary,
+      offerMade }, context) => {
+      if (context.user) {
+        const job = await Job.create({
+          company,
+          role,
+          advertisedSalary,
+          offerMade,
+        });
 
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { thoughts: thought._id } }
-    //     );
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedJobs: job._id } }
+        );
 
-    //     return thought;
-    //   }
-    //   throw AuthenticationError;
-    //   ('You need to be logged in!');
-    // },
+        return job;
+      }
+      throw AuthenticationError;
+      ('You need to be logged in!');
+    },
+
+
     // addComment: async (parent, { thoughtId, commentText }, context) => {
     //   if (context.user) {
     //     return Thought.findOneAndUpdate(

@@ -2,38 +2,36 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+// import { ADD_THOUGHT } from '../../utils/mutations';
+import { QUERY_ME } from '../../utils/queries';
+import { ADD_JOB } from '../../utils/mutations';
+
 
 import Auth from '../../utils/auth';
 
-const ThoughtForm = () => {
-  const [thoughtText, setThoughtText] = useState('');
+const jobForm = () => {
+  // const [thoughtText, setThoughtText] = useState('');
 
-  const [characterCount, setCharacterCount] = useState(0);
+  // const [characterCount, setCharacterCount] = useState(0);
 
-  const [addThought, { error }] = useMutation
-  (ADD_THOUGHT, {
-    refetchQueries: [
-      QUERY_THOUGHTS,
-      'getThoughts',
-      QUERY_ME,
-      'me'
-    ]
-  });
+  const [addJob, { error }] = useMutation
+  (ADD_JOB);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addThought({
+      const { data } = await addJob({
         variables: {
-          thoughtText,
-          thoughtAuthor: Auth.getProfile().data.username,
+          company,
+          role,
+          advertisedSalary,
+          offerMade
+          
         },
       });
 
-      setThoughtText('');
+      // setThoughtText('');
     } catch (err) {
       console.error(err);
     }
