@@ -6,8 +6,12 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      thoughts {
+      firstName
+      lastName
+      savedJobs {
         _id
+        // INSERT STUFF FOR SAVED JOBS
+        
         thoughtText
         createdAt
       }

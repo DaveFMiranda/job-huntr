@@ -1,5 +1,7 @@
-const { User } = require('../models');
+const { User, //insert Job here// 
+} = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+
 
 const resolvers = {
   Query: {
@@ -18,15 +20,16 @@ const resolvers = {
     // },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id } //.populate(savedJobs)// 
+        );
       }
       throw AuthenticationError;
     },
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { username, email, password, firstName, lastName }) => {
+      const user = await User.create({ username, email, password, firstName, lastName });
       const token = signToken(user);
       return { token, user };
     },

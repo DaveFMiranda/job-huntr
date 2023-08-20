@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+//TO DO: import Job model here
 
 const userSchema = new Schema({
   username: {
@@ -19,12 +20,22 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  // thoughts: [
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+
+  // TO DO: created Job model, etc.
+  // savedJobs: [
   //   {
   //     type: Schema.Types.ObjectId,
-  //     ref: 'Thought',
-  //   },
-  // ],
+  //     ref: 'Job'
+  //   }
+  //   ]
 });
 
 userSchema.pre('save', async function (next) {
