@@ -32,6 +32,8 @@ const resolvers = {
       return Job.findOne({ _id });
 
   },
+},
+
 
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName }) => {
@@ -63,8 +65,9 @@ const resolvers = {
     },
     updateJob: async (parent, { _id, company, role, offer }) => {
       const job = await Job.findOneAndUpdate(
-        {_id },
+        {_id: _id },
         { company, role, offer },
+        { new: true }
       );
       return job;
     },
