@@ -47,6 +47,7 @@ offer: {
 
 timestamps: true 
 // This option adds createdAt and updatedAt fields
+
 });
 
 
