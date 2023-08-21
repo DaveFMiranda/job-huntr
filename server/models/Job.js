@@ -1,50 +1,45 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
 const jobSchema = new Schema({
   company: {
     type: String,
     required: true,
   },
 
-  role:{
+  role: {
     type: String,
     required: true,
   },
 
   advertisedSalary: {
-    type: Number
+    type: Number,
   },
 
-// contactPerson: [
-//   // this is a separate entry that should populate with contactSchema
-// // name:
-// // phone:
-// // email:
+  // contactPerson: [
+  //   // this is a separate entry that should populate with contactSchema
+  //   // name:
+  //   // phone:
+  //   // email:
+  // ],
 
-// ],
+  // communicationLog: [
+  //   // incoming vs. outgoing
+  //   // time and date stamp
+  //   // form of communication: eg email vs. phone vs. in person
+  //   // note:
+  //   // next step
+  // ],
 
-//   communicationLog: [
-// // incoming vs. outgoing
-// // time and date stamp
-// // form of communication: eg email vs. phone vs. in person
-// // note:
-// // next step
-//   ]
+  offer: {
+    type: Boolean,
+  },
 
-offer: {
-  type: Boolean,
-},
-
-timestamps: true, 
-type: Date,
-default: Date.now
-
-// This option adds createdAt and updatedAt fields
-
+  timestamps: {
+    type: Date,
+    default: Date.now,
+  },
 });
-
 
 const Job = model('Job', jobSchema);
 
