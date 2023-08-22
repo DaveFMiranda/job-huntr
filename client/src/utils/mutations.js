@@ -36,6 +36,22 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_COMMENT = gql`
+  mutation addComment($thoughtId: ID!, $commentText: String!) {
+    addComment(thoughtId: $thoughtId, commentText: $commentText) {
+      _id
+      thoughtText
+      thoughtAuthor
+      createdAt
+      comments {
+        _id
+        commentText
+        createdAt
+      }
+    }
+  }
+`;
+
 export const ADD_JOB = gql`
   mutation addJob(
     $company: String!
@@ -59,18 +75,30 @@ export const ADD_JOB = gql`
   }
 `;
 
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
+export const UPDATE_JOB = gql`
+  mutation updateJob(
+    $_id: ID!, 
+    $company: String, 
+    $role: String, 
+    $offer: Boolean
+    ) {
+    updateJob(
+      _id: $_id
+      company: $company
+      role: $role
+      offer: $offer
+    ) {
       _id
-      thoughtText
-      thoughtAuthor
+      company
+      role
+      offerMade
       createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
     }
   }
 `;
+
+
+
+
+
+
