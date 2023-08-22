@@ -10,8 +10,7 @@ export const QUERY_USER = gql`
       lastName
       savedJobs {
         _id
-        // INSERT STUFF FOR SAVED JOBS
-        
+      
         thoughtText
         createdAt
       }
