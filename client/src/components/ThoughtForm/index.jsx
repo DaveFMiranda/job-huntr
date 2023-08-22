@@ -96,4 +96,4 @@ const jobForm = () => {
   );
 };
 
-export default ThoughtForm;
+export default jobForm;
