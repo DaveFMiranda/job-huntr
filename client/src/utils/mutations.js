@@ -88,7 +88,6 @@ export const UPDATE_JOB = gql`
       role: $role
       offer: $offer
     ) {
-      _id
       company
       role
       offerMade
