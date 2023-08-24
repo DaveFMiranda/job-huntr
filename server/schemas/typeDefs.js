@@ -50,6 +50,7 @@ type Contact {
       advertisedSalary: Int
       offerMade: Boolean
       ): Job
+    updateJob(_id: ID!, company: String, role: String, offerMade: Boolean): Job
   }
 `;
 

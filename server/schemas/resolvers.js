@@ -87,6 +87,20 @@ const resolvers = {
       return job;
     },
 
+    updateJob: async (parent, { _id, company, role, offerMade }) => {
+      const job = { _id, company, role, offerMade}
+     await Job.findOneAndUpdate(
+        { _id: _id },
+        { company, role, offerMade },
+        { new: true }
+      );
+
+      return job;
+    
+    throw AuthenticationError;
+    ('You need to be logged in!');
+  },
+
     // addComment: async (parent, { thoughtId, commentText }, context) => {
     //   if (context.user) {
     //     return Thought.findOneAndUpdate(

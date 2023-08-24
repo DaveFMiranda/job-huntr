@@ -59,6 +59,27 @@ export const ADD_JOB = gql`
   }
 `;
 
+export const UPDATE_JOB = gql`
+  mutation updateJob(
+    $_id: ID!, 
+    $company: String, 
+    $role: String, 
+    $offer: Boolean
+    ) {
+    updateJob(
+      _id: $_id
+      company: $company
+      role: $role
+      offer: $offer
+    ) {
+      company
+      role
+      offerMade
+      createdAt
+    }
+  }
+`;
+
 export const ADD_COMMENT = gql`
   mutation addComment($thoughtId: ID!, $commentText: String!) {
     addComment(thoughtId: $thoughtId, commentText: $commentText) {
