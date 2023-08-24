@@ -95,7 +95,7 @@ const resolvers = {
       );
       return job;
     },
-
+    
 
     updateJob: async (parent, { _id, company, role, offerMade }) => {
       const job = { _id, company, role, offerMade}

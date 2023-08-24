@@ -68,6 +68,8 @@ type ComLog {
       ): Job
     updateJob(_id: ID!, company: String, role: String, offerMade: Boolean): Job
 
+    deleteJob(_id: ID!): Job
+
     addComLog(method: String!
       content: String!
       direction: String!

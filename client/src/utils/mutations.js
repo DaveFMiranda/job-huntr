@@ -90,6 +90,18 @@ export const UPDATE_JOB = gql`
   }
 `;
 
+export const DELETE_JOB = gql`
+  mutation deleteJob($_id: ID!) {
+    deleteJob(_id: $_id) {
+      _id
+      company
+      role
+      offerMade
+      createdAt
+    }
+  }
+`;
+
 export const ADD_COMLOG = gql`
   mutation addComLog(
     $method: String!
