@@ -88,8 +88,8 @@ const resolvers = {
     },
 
     updateJob: async (parent, { _id, company, role, offerMade }) => {
-       
-      await Job.findOneAndUpdate(
+        const job = { _id, company, role, offerMade}
+       await Job.findOneAndUpdate(
           { _id: _id },
           { company, role, offerMade },
           { new: true }
