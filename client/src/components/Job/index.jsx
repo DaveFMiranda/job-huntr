@@ -5,7 +5,6 @@ import ComLog from "../ComLog";
 import { QUERY_JOB } from "../../utils/queries";
 
 const Job = ({jobId}) => {
-  // DAVE NEED TO PASS IN A PROP WITH THE JOB ID
   const { loading, data } = useQuery(QUERY_JOB, {variables: {_id: jobId}});
 
   const job = data?.job;
@@ -39,7 +38,7 @@ const Job = ({jobId}) => {
           <p>Phone: {contactPhone}</p>
           <p>Email: {contactEmail}</p>
           <p>Notes: {contactNotes}</p>
-          <ComLog comLogs={job.comLogArray}/>
+          <ComLog comLogs={job.comLogArray} jobId={jobId}/>
         </div>
       </div>
     </div>

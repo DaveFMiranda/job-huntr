@@ -92,11 +92,13 @@ export const UPDATE_JOB = gql`
 
 export const ADD_COMLOG = gql`
   mutation addComLog(
+    $jobId: String!
     $method: String!
     $content: String!
     $direction: String!
   ){
   addComLog(
+    jobId: $jobId
     method: $method
     content: $content
     direction: $direction

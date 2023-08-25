@@ -44,6 +44,7 @@ type CommonQuestions {
 }
 
 type ComLog {
+  _id: ID
   method: String!
   content: String!
   direction: String!
@@ -81,7 +82,9 @@ type ComLog {
       updateQuestion(_id:ID!, question: String, response: String): CommonQuestions
     updateJob(_id: ID!, company: String, role: String, offerMade: Boolean): Job
 
-    addComLog(method: String!
+    addComLog(
+      jobId: String!
+      method: String!
       content: String!
       direction: String!
       ): ComLog
