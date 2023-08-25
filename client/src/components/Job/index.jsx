@@ -17,8 +17,12 @@ const Job = ({jobId}) => {
   if (!data.job) {
     return <h4>Looks like there isn't any more data for this job.</h4>;
   }
-  const { contactName, contactRole, contactPhone, contactEmail, contactNotes } =
+  const { name: contactName, role: contactRole, phone: contactPhone, email: contactEmail, notes: contactNotes } =
     job.contactPerson;
+    console.log(contactName);
+    console.log(contactRole);
+
+    console.log(job.contactPerson);
   return (
     <div>
       <div className="flex-row justify-center mb-3">

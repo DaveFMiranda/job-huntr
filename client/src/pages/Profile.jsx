@@ -19,6 +19,7 @@ const Profile = () => {
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   const handleJobClick = (jobId) => {
+    console.log(jobId);
     setSelectedJobId(jobId);
   };
   // navigate to personal profile page if username is yours
