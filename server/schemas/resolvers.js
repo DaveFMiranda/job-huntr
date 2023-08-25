@@ -18,9 +18,8 @@ const resolvers = {
     // },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne(
-          { _id: context.user._id }//populate(savedJobs) //
-        );
+        return User.findOne({ _id: context.user._id }).populate("savedJobs").populate('savedJobs.contactPerson')
+        ;
       }
       throw AuthenticationError;
     },
@@ -64,29 +63,30 @@ const resolvers = {
 
       return { token, user };
     },
-    addJob: async (parent, { company,
-      role,
-      advertisedSalary,
-      offerMade }, context) => {
-      if (context.user) {
-        const job = await Job.create({
-          company,
-          role,
-          advertisedSalary,
-          offerMade,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { savedJobs: job._id } }
-        );
-
-        return job;
+    addJob: async (
+      parent,
+      { company, role, advertisedSalary, offerMade, contactPerson },
+      context
+    ) => {
+      if (!context.user) {
+        throw AuthenticationError;
       }
-      throw AuthenticationError;
-      ('You need to be logged in!');
-    },
+      const job = await Job.create({
+        company,
+        role,
+        advertisedSalary,
+        offerMade,
+        contactPerson
+      });
 
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { savedJobs: job._id } },
+        { new: true, runValidators: true }
+      );
+      console.log(context.user._id);
+      return job;
+    },
 
     // addComment: async (parent, { thoughtId, commentText }, context) => {
     //   if (context.user) {

@@ -8,7 +8,6 @@ export const QUERY_USER = gql`
       email
       firstName
       lastName
-  
     }
   }
 `;
@@ -47,7 +46,19 @@ export const QUERY_ME = gql`
       _id
       username
       email
-      
+      savedJobs {
+        company
+        role
+        advertisedSalary
+        offerMade
+        contactPerson {
+          name
+          role
+          phone
+          email
+          notes
+        }
+      }
     }
   }
 `;

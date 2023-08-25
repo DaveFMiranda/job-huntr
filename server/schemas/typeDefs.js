@@ -3,7 +3,6 @@ const typeDefs = `
     _id: ID
     username: String
     email: String
-    password: String
     firstName: String
     lastName: String
    savedJobs: [Job]!
@@ -15,17 +14,25 @@ type Job {
   role: String!
   advertisedSalary: Int
   offerMade: Boolean
+  contactPerson: ContactPerson
   createdAt: String
   updatedAt: String
 }
 
-type Contact {
-  _id: ID
+type ContactPerson {
   name: String!
   role: String
   phone: String
   email: String
+  notes: String
+}
 
+input ContactPersonInput {
+  name: String!
+  role: String
+  phone: String
+  email: String
+  notes: String
 }
 
   type Auth {
@@ -49,6 +56,7 @@ type Contact {
       role: String!
       advertisedSalary: Int
       offerMade: Boolean
+      contactPerson: ContactPersonInput
       ): Job
   }
 `;
