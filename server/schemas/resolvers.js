@@ -109,7 +109,11 @@ const resolvers = {
       ("You need to be logged in!");
     },
 
-    addComLog: async (parent, { jobId, method, content, direction }, context) => {
+    addComLog: async (
+      parent,
+      { jobId, method, content, direction },
+      context
+    ) => {
       if (!context.user) {
         throw AuthenticationError;
       }
@@ -126,6 +130,7 @@ const resolvers = {
       );
       return comLog;
     },
+    
     addQuestion: async (_parent, { question, response }, context) => {
       if (!context.user) {
         throw AuthenticationError;

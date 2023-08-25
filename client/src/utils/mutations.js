@@ -68,20 +68,14 @@ export const ADD_JOB = gql`
   }
 `;
 
-
 export const UPDATE_JOB = gql`
   mutation updateJob(
-    $_id: ID!, 
-    $company: String, 
-    $role: String, 
+    $_id: ID!
+    $company: String
+    $role: String
     $offer: Boolean
-    ) {
-    updateJob(
-      _id: $_id
-      company: $company
-      role: $role
-      offer: $offer
-    ) {
+  ) {
+    updateJob(_id: $_id, company: $company, role: $role, offer: $offer) {
       company
       role
       offerMade
@@ -96,34 +90,17 @@ export const ADD_COMLOG = gql`
     $method: String!
     $content: String!
     $direction: String!
-  ){
-  addComLog(
-    jobId: $jobId
-    method: $method
-    content: $content
-    direction: $direction
-  ){
-    _id
-    method
-    content
-    direction
-  }}
-`;
-
-
-// NOTE: delete this one it's from the source code
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
+  ) {
+    addComLog(
+      jobId: $jobId
+      method: $method
+      content: $content
+      direction: $direction
+    ) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+      method
+      content
+      direction
     }
   }
 `;
