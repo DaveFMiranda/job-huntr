@@ -105,7 +105,7 @@ const Login = (props) => {
           </div>
         </div>
       </div>
-      <Iceburger />
+      {/* <Iceburger /> */}
     </main>
   );
 };
