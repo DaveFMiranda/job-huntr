@@ -102,6 +102,7 @@ const UserTermsForm = () => {
               <input
                 type="text"
                 name="location"
+                placeholder="Where do you want to work?"
                 value={location}
                 onChange={(e) => setLocation(e.target.checked)}
               />
