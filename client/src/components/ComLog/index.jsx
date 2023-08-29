@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {ADD_COMLOG} from '../../utils/mutations';
 import {useMutation} from "@apollo/client";
+import formatTimestamp from '../../utils/date';
 
 const ComLog = ({ comLogs = [], jobId }) => {
   const [method, setMethod] = useState("");
@@ -8,6 +9,7 @@ const ComLog = ({ comLogs = [], jobId }) => {
   const [direction, setDirection] = useState("");
 
   const [addComLog, { error }] = useMutation(ADD_COMLOG);
+  
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -96,8 +98,11 @@ const ComLog = ({ comLogs = [], jobId }) => {
             console.log(comLog);
             return (
               <li key={index}>
-                Method: {comLog.method}, Content: {comLog.content}, Direction:
-                {comLog.direction}
+                Method: {comLog.method},
+                Content: {comLog.content},
+                Direction:{comLog.direction}, 
+                Created At: {formatTimestamp(comLog.createdAt)}, 
+                Updated At: {formatTimestamp(comLog.updatedAt)}
               </li>
             );
           })
