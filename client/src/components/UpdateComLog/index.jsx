@@ -1,24 +1,21 @@
-import {useState} from 'react';
-import {ADD_COMLOG} from '../../utils/mutations';
-import {useMutation} from "@apollo/client";
-import UpdateComLog from "../UpdateComLog";
+import { useState } from "react";
+import { UPDATE_COMLOG } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
 
-
-const ComLog = ({ comLogs = [], jobId }) => {
+const UpdateComLog = ({ _id, jobId }) => {
   const [method, setMethod] = useState("");
   const [content, setContent] = useState("");
   const [direction, setDirection] = useState("");
-  const [selectedComLog, setSelectedComLog] = useState(null);
 
-
-  const [addComLog, { error }] = useMutation(ADD_COMLOG);
+  const [updateComLog, { error }] = useMutation(UPDATE_COMLOG);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addComLog({
+      const { data } = await updateComLog({
         variables: {
+          _id,
           jobId,
           method,
           content,
@@ -32,15 +29,8 @@ const ComLog = ({ comLogs = [], jobId }) => {
       console.error(err);
     }
   };
-  
-  const addLogButtonHandler = () => {
 
-  };
-
-  const updateLogButtonHandler = (comLogId, jobId) => {
-    setSelectedComLog({comLogId, jobId});
-    
-  };
+  const updateLogButtonHandler = () => {};
 
   return (
     <>
@@ -48,14 +38,14 @@ const ComLog = ({ comLogs = [], jobId }) => {
         <button
           className="btn btn-primary"
           type="submit"
-          onClick={addLogButtonHandler}
+          onClick={updateLogButtonHandler}
         >
-          Add Communication
+          Update This Communication
         </button>
       </div>
 
       <div>
-        <h3>Add a Communication</h3>
+        <h3>Update a Communication</h3>
 
         <form onSubmit={handleFormSubmit}>
           <div className="form-group">
@@ -65,7 +55,6 @@ const ComLog = ({ comLogs = [], jobId }) => {
               placeholder="Method"
               value={method}
               onChange={(e) => setMethod(e.target.value)}
-              required
             />
           </div>
           <div className="form-group">
@@ -75,7 +64,6 @@ const ComLog = ({ comLogs = [], jobId }) => {
               placeholder="Content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              required
             />
           </div>{" "}
           <div className="form-group">
@@ -85,50 +73,17 @@ const ComLog = ({ comLogs = [], jobId }) => {
               placeholder="Direction"
               value={direction}
               onChange={(e) => setDirection(e.target.value)}
-              required
             />
           </div>
           <div className="form-group">
             <button className="btn btn-primary" type="submit">
-              Submit Communication
+              Submit Updated Communication
             </button>
           </div>
         </form>
       </div>
-
-
-      <ul>
-        {!comLogs.length ? (
-          <h3>No Communication Yet</h3>
-        ) : (
-          comLogs.map((comLog, index) => {
-            console.log(comLog);
-            return (
-
-              
-
-              <div>
-              <li key={index}>
-                Method: {comLog.method}, Content: {comLog.content}, Direction:
-                {comLog.direction}
-              </li>
-              <button
-              className="btn btn-primary"
-              type="submit"
-              onClick={()=> updateLogButtonHandler(comLog._id, jobId)}
-            >
-              Update This Communication
-            </button>
-            
-            {selectedComLog && <UpdateComLog _id={selectedComLog.comLogId} jobId={selectedComLog.jobId} />}
-            </div>
-
-            );
-          })
-        )}
-      </ul>
     </>
   );
 };
 
-export default ComLog;
+export default UpdateComLog;

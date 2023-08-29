@@ -62,6 +62,8 @@ const typeDefs = `
     method: String!
     content: String!
     direction: String!
+    createdAt: String
+    updatedAt: String
   }
 
   type EmploymentTerms {
