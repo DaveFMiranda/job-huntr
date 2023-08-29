@@ -47,6 +47,9 @@ const resolvers = {
     question: async (_parent, { _id }) => {
       return CommonQuestions.findOne({ _id });
     },
+    terms: async () => {
+      return User.findOne({_id}).populate('employmentTerms');
+    },
   },
 
   Mutation: {

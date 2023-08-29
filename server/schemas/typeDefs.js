@@ -94,7 +94,7 @@ const typeDefs = `
     question(_id: ID): CommonQuestions
     comLogs: [ComLog]
     comLog(_id: ID): ComLog
-    employmentTerms(_id: ID): EmploymentTerms
+    terms(_id: ID): User
   }
 
   type Mutation {
