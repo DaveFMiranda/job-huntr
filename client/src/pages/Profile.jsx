@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import Job from "../components/Job";
 import UserTermsForm from "../components/UserTermsForm";
+import Terms from "../components/Terms";
 
 
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
@@ -101,6 +102,7 @@ const Profile = () => {
           {selectedJobId && <Job jobId={selectedJobId} />}
         </div>
         <div><UserTermsForm /></div>
+        {/* <div><Terms userId={user._id} /></div> */}
       </div>
     </div>
   );

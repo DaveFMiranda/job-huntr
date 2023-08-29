@@ -81,9 +81,29 @@ export const QUERY_ME = gql`
           notes
         }
       }
-      savedQuestions{
+      savedQuestions {
         question
         response
+      }
+    }
+  }
+`;
+
+export const QUERY_TERMS = gql`
+  query terms($id: ID!) {
+    terms(_id: $id) {
+      employmentTerms {
+        tenure
+        salary
+        insurance
+        location
+        flexibleHours
+        PTO
+        retirement
+        parentalLeave
+        training
+        mentorship
+        notes
       }
     }
   }
