@@ -1,13 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { QUERY_TERMS } from "../../utils/queries";
 
-const Terms = (userId) => {
+const Terms = ({user}) => {
   const { loading, data } = useQuery(QUERY_TERMS, {
-    variables: { _id: userId },
+    variables: { _id: user._id },
   });
 
-  const { terms } = data?.user.employmentTerms;
-
+  const terms = data?.user.employmentTerms;
+console.log(user);
   if (loading) {
     return <div>Loading...</div>;
   }

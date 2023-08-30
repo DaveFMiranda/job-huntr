@@ -16,7 +16,7 @@ const Home = () => {
           <a className="navlink" href="">
             User Settings
           </a>
-          <a className="navlink" href="">
+          <a className="navlink" href="/terms">
             My Terms
           </a>
         </div>

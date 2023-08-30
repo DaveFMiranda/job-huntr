@@ -62,6 +62,7 @@ const Profile = () => {
                   
                   <>
                     <div className="job-details">
+                      <p>{user.employmentTerms} </p>
                       <ul>
                         <li> <span>Contact Person Name:</span> {job.contactPerson.name}</li>
                         <li><span>Contact Person Role:</span> {job.contactPerson.role}</li>
@@ -102,7 +103,8 @@ const Profile = () => {
           {selectedJobId && <Job jobId={selectedJobId} />}
         </div>
         <div><UserTermsForm /></div>
-        {/* <div><Terms userId={user._id} /></div> */}
+        
+        {/* <div><Terms user={user} /></div> */}
       </div>
     </div>
   );

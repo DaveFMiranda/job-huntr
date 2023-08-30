@@ -17,6 +17,9 @@ import FAQ from "./pages/FAQ.jsx";
 import AddQuestion from "./pages/AddQuestion.jsx";
 import JobTracker from "./pages/JobTracker.jsx";
 import Jobs from "./pages/Jobs.jsx";
+import Terms from "./components/Terms/index.jsx";
+import UserTermsForm from "./components/UserTermsForm/index.jsx";
+
 
 
 const router = createBrowserRouter([
@@ -51,6 +54,10 @@ const router = createBrowserRouter([
       { path: "/AddQuestion", element: <AddQuestion />},
       { path: "/JobTracker", element: <JobTracker />},
       { path: "/Jobs", element: <Jobs />},
+      { path: "/Terms", element: <Terms />},
+      { path: "/addterms", element: <UserTermsForm />},
+
+
       //
       {
         path: "/signup",

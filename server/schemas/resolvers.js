@@ -38,7 +38,7 @@ const resolvers = {
     comLogs: async () => {
       return ComLog.find();
     },
-    comLog: async () => {
+    comLog: async (_parent, { _id }) => {
       return ComLog.findOne({ _id });
     },
     questions: async () => {
@@ -47,8 +47,8 @@ const resolvers = {
     question: async (_parent, { _id }) => {
       return CommonQuestions.findOne({ _id });
     },
-    terms: async () => {
-      return User.findOne({_id}).populate('employmentTerms');
+    terms: async (_parent, { _id }) => {
+      return User.findOne({ _id }).populate("employmentTerms");
     },
   },
 
@@ -128,8 +128,10 @@ const resolvers = {
       return deletedContactPerson;
     },
 
-
-    updateJob: async (parent, { _id, company, advertisedSalary, role, offerMade }) => {
+    updateJob: async (
+      parent,
+      { _id, company, advertisedSalary, role, offerMade }
+    ) => {
       const job = { _id, company, advertisedSalary, role, offerMade };
       await Job.findOneAndUpdate(
         { _id: _id },
@@ -184,23 +186,16 @@ const resolvers = {
       if (!context.user) {
         throw AuthenticationError;
       }
-      const comLog = {_id, jobId, method, content, direction};
-      
+      const comLog = { _id, method, content, direction };
+
       await ComLog.findOneAndUpdate(
-        {_id: _id},
-        {method, content, direction},
-        {new: true}
+        { _id: _id },
+        { method, content, direction },
+        { new: true }
       );
 
-      await Job.findOneAndUpdate(
-        { _id: jobId },
-        { $pull: { comLogArray: comLog._id } },
-        { new: true, runValidators: true }
-      );
       return comLog;
     },
-
-
 
     addQuestion: async (_parent, { question, response }, context) => {
       if (!context.user) {
@@ -229,36 +224,16 @@ const resolvers = {
 
       return updatedQuestion;
     },
-    addEmploymentTerms: async (
-      parent,
-      { EmploymentTermsInput },
-      context
-    ) => {
-      const newTerms = { EmploymentTermsInput };
-      await EmploymentTerms.create(
-        {
-          tenure: EmploymentTermsInput.tenure,
-          salary: EmploymentTermsInput.salary,
-          insurance: EmploymentTermsInput.insurance,
-          location: EmploymentTermsInput.location,
-          flexibleHours: EmploymentTermsInput.flexibleHours,
-          PTO: EmploymentTermsInput.PTO,
-          retirement: EmploymentTermsInput.retirement,
-          parentalLeave: EmploymentTermsInput.parentalLeave,
-          training: EmploymentTermsInput.training,
-          mentorship: EmploymentTermsInput.mentorship,
-          notes: EmploymentTermsInput.notes,
-        },
-        { new: true }
-      );
-
+    addEmploymentTerms: async (parent, { employmentTerms }, context) => {
+      const savedTerms = await EmploymentTerms.create({ ...employmentTerms });
       await User.findOneAndUpdate(
         { _id: context.user._id },
         // THIS might be an issue, might need to destructure ETI
-        { employmentTerms: EmploymentTermsInput },
+        { employmentTerms: savedTerms._id },
         { new: true, runValidators: true }
       );
-      return newTerms;
+
+      return savedTerms;
     },
   },
 };

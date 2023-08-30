@@ -93,7 +93,7 @@ const UserTermsForm = () => {
                   type="checkbox"
                   name="insurance"
                   checked={insurance}
-                  onChange={(e) => setInsurance(e.target.value)}
+                  onChange={(e) => setInsurance(e.target.checked)}
                 />
               </label>
             </div>
@@ -104,7 +104,7 @@ const UserTermsForm = () => {
                 name="location"
                 placeholder="Where do you want to work?"
                 value={location}
-                onChange={(e) => setLocation(e.target.checked)}
+                onChange={(e) => setLocation(e.target.value)}
               />
             </div>
 
@@ -115,7 +115,7 @@ const UserTermsForm = () => {
                   type="checkbox"
                   name="flexibleHours"
                   checked={flexibleHours}
-                  onChange={(e) => setFlexibleHours(e.target.value)}
+                  onChange={(e) => setFlexibleHours(e.target.checked)}
                 />
               </label>
             </div>
@@ -135,7 +135,7 @@ const UserTermsForm = () => {
                   type="checkbox"
                   name="retirement"
                   checked={retirement}
-                  onChange={(e) => setRetirement(e.target.value)}
+                  onChange={(e) => setRetirement(e.target.checked)}
                 />
               </label>
             </div>
@@ -146,7 +146,7 @@ const UserTermsForm = () => {
                   type="checkbox"
                   name="parentalLeave"
                   checked={parentalLeave}
-                  onChange={(e) => setParentalLeave(e.target.value)}
+                  onChange={(e) => setParentalLeave(e.target.checked)}
                 />
               </label>
             </div>
@@ -157,7 +157,7 @@ const UserTermsForm = () => {
                   type="checkbox"
                   name="training"
                   checked={training}
-                  onChange={(e) => setTraining(e.target.value)}
+                  onChange={(e) => setTraining(e.target.checked)}
                 />
               </label>
             </div>
@@ -168,7 +168,7 @@ const UserTermsForm = () => {
                   type="checkbox"
                   name="mentorship"
                   checked={mentorship}
-                  onChange={(e) => setMentorship(e.target.value)}
+                  onChange={(e) => setMentorship(e.target.checked)}
                 />
               </label>
             </div>
