@@ -47,8 +47,8 @@ const resolvers = {
     question: async (_parent, { _id }) => {
       return CommonQuestions.findOne({ _id });
     },
-    terms: async (_parent, { _id }) => {
-      return User.findOne({ _id }).populate("employmentTerms");
+    employmentTerms: async (_parent, args, context) => {
+      return EmploymentTerms.find();
     },
     contacts: async () => {
       return Contact.find();
@@ -271,21 +271,21 @@ const resolvers = {
 
       return updatedQuestion;
     },
-    addEmploymentTerms: async (parent, { EmploymentTermsInput }, context) => {
-      const newTerms = { EmploymentTermsInput };
+    addEmploymentTerms: async (parent, { employmentTerms }, context) => {
+      const newTerms = employmentTerms ;
       await EmploymentTerms.create(
         {
-          tenure: EmploymentTermsInput.tenure,
-          salary: EmploymentTermsInput.salary,
-          insurance: EmploymentTermsInput.insurance,
-          location: EmploymentTermsInput.location,
-          flexibleHours: EmploymentTermsInput.flexibleHours,
-          PTO: EmploymentTermsInput.PTO,
-          retirement: EmploymentTermsInput.retirement,
-          parentalLeave: EmploymentTermsInput.parentalLeave,
-          training: EmploymentTermsInput.training,
-          mentorship: EmploymentTermsInput.mentorship,
-          notes: EmploymentTermsInput.notes,
+          tenure: newTerms.tenure,
+          salary: newTerms.salary,
+          insurance: newTerms.insurance,
+          location: newTerms.location,
+          flexibleHours: newTerms.flexibleHours,
+          PTO: newTerms.PTO,
+          retirement: newTerms.retirement,
+          parentalLeave: newTerms.parentalLeave,
+          training: newTerms.training,
+          mentorship: newTerms.mentorship,
+          notes: newTerms.notes,
         },
         { new: true }
       );
@@ -293,11 +293,11 @@ const resolvers = {
       await User.findOneAndUpdate(
         { _id: context.user._id },
         // THIS might be an issue, might need to destructure ETI
-        { employmentTerms: savedTerms._id },
+        { employmentTerms: newTerms._id },
         { new: true, runValidators: true }
       );
 
-      return savedTerms;
+      return newTerms;
     },
   },
 };

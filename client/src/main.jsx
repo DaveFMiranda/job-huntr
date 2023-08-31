@@ -12,13 +12,11 @@ import CompanyPage from "./pages/CompanyPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import CommonQuestions from "./pages/CommonQuestions.jsx";
 import QuestionUpdate from "./components/QuestionUpdate/index.jsx";
-//test pages - DELETE IF NOT USING
 import FAQ from "./pages/FAQ.jsx";
 import AddQuestion from "./pages/AddQuestion.jsx";
 import JobTracker from "./pages/JobTracker.jsx";
 import Jobs from "./pages/Jobs.jsx";
-import Terms from "./components/Terms/index.jsx";
-import UserTermsForm from "./components/UserTermsForm/index.jsx";
+import TermsPage from "./pages/TermsPage.jsx"
 
 
 
@@ -54,8 +52,7 @@ const router = createBrowserRouter([
       { path: "/AddQuestion", element: <AddQuestion />},
       { path: "/JobTracker", element: <JobTracker />},
       { path: "/Jobs", element: <Jobs />},
-      { path: "/Terms", element: <Terms />},
-      { path: "/addterms", element: <UserTermsForm />},
+      { path: "/Terms", element: <TermsPage />},
 
 
       //

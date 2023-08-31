@@ -7,7 +7,7 @@ const typeDefs = `
     lastName: String
    savedJobs: [Job]!
    savedQuestions: [CommonQuestions]!
-   employmentTerms: ID
+   employmentTerms: EmploymentTerms
   }
 
   type Job {
@@ -88,7 +88,7 @@ const typeDefs = `
     question(_id: ID): CommonQuestions
     comLogs: [ComLog]
     comLog(_id: ID): ComLog
-    employmentTerms(_id: ID): EmploymentTerms
+    employmentTerms: EmploymentTerms
     contacts: [Contact]
   }
 

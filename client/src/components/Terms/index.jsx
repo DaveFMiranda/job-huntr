@@ -1,18 +1,16 @@
 import { useQuery } from "@apollo/client";
-import { QUERY_TERMS } from "../../utils/queries";
+import { QUERY_EMPLOYMENT_TERMS } from "../../utils/queries";
 
-const Terms = ({user}) => {
-  const { loading, data } = useQuery(QUERY_TERMS, {
-    variables: { _id: user._id },
-  });
+const Terms = () => {
+  const { loading, data } = useQuery(QUERY_EMPLOYMENT_TERMS);
 
-  const terms = data?.user.employmentTerms;
-console.log(user);
+  const terms = data?.employmentTerms.employmentTerms;
+// console.log({user});
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!data.user.employmentTerms) {
+  if (!data.employmentTerms.employmentTerms) {
     return <h4>Looks like there aren't any employment terms for this user.</h4>;
   }
 
@@ -20,7 +18,7 @@ console.log(user);
     <div>
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Viewing terms of employment for {data.user.username}
+          Viewing your terms of employment
         </h2>
 
         <div className="col-12 col-md-10 mb-5">

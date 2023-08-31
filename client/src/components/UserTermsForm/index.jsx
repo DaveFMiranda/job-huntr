@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
-import { ADD_TERMS } from "../../utils/mutations";
+import { ADD_EMPLOYMENT_TERMS } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
 
@@ -19,7 +19,7 @@ const UserTermsForm = () => {
   const [mentorship, setMentorship] = useState(false);
   const [notes, setNotes] = useState("");
 
-  const [addTerms, { error }] = useMutation(ADD_TERMS);
+  const [addTerms, { error }] = useMutation(ADD_EMPLOYMENT_TERMS);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

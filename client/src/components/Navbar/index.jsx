@@ -13,7 +13,7 @@ const Navbar = () => {
         <a className="navlink" href="/FAQ">
           Commonly Asked Questions
         </a>
-        <a className="navlink" href="">
+        <a className="navlink" href="/terms">
           My Terms
         </a>
       </div>

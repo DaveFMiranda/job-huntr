@@ -46,7 +46,6 @@ export const QUERY_QUESTION = gql`
       _id
       question
       response
-      
     }
   }
 `;
@@ -57,7 +56,6 @@ export const QUERY_QUESTION_BY_ID = gql`
       _id
       question
       response
-      
     }
   }
 `;
@@ -80,14 +78,28 @@ export const QUERY_ME = gql`
         question
         response
       }
+      employmentTerms {
+        tenure
+        salary
+        insurance
+        location
+        flexibleHours
+        PTO
+        retirement
+        parentalLeave
+        training
+        mentorship
+        notes
+      }
     }
   }
 `;
 
-export const QUERY_TERMS = gql`
-  query terms($id: ID!) {
-    terms(_id: $id) {
-      employmentTerms {
+export const QUERY_EMPLOYMENT_TERMS = gql`
+  query employmentTerms {
+    employmentTerms {
+      employmentTerms
+       {
         tenure
         salary
         insurance

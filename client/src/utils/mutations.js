@@ -221,14 +221,13 @@ mutation updateQuestion(
   }}
 `;
 
-export const ADD_TERMS = gql`
+export const ADD_EMPLOYMENT_TERMS = gql`
   mutation addEmploymentTerms(
     $employmentTerms: EmploymentTermsInput
   ){
     addEmploymentTerms(
       employmentTerms: $employmentTerms
     ){
-      _id
       tenure
       salary
       insurance
