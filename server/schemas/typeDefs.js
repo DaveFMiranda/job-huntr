@@ -59,7 +59,6 @@ const typeDefs = `
   }
 
   type EmploymentTerms {
-    _id: ID
     tenure: String
     salary: Int
     insurance: Boolean
@@ -88,7 +87,7 @@ const typeDefs = `
     question(_id: ID): CommonQuestions
     comLogs: [ComLog]
     comLog(_id: ID): ComLog
-    employmentTerms: EmploymentTerms
+    employmentTerms: User
     contacts: [Contact]
   }
 

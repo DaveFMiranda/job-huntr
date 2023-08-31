@@ -48,7 +48,7 @@ const resolvers = {
       return CommonQuestions.findOne({ _id });
     },
     employmentTerms: async (_parent, args, context) => {
-      return EmploymentTerms.find();
+      return User.findOne({_id: context.user._id}).populate('employmentTerms');
     },
     contacts: async () => {
       return Contact.find();
@@ -272,20 +272,34 @@ const resolvers = {
       return updatedQuestion;
     },
     addEmploymentTerms: async (parent, { employmentTerms }, context) => {
-      const newTerms = employmentTerms ;
-      await EmploymentTerms.create(
+      
+      const {
+        tenure,
+        salary,
+        insurance,
+        location,
+        flexibleHours,
+        PTO,
+        retirement,
+        parentalLeave,
+        training,
+        mentorship,
+        notes
+      } = employmentTerms;
+
+      const newTerms = await EmploymentTerms.create(
         {
-          tenure: newTerms.tenure,
-          salary: newTerms.salary,
-          insurance: newTerms.insurance,
-          location: newTerms.location,
-          flexibleHours: newTerms.flexibleHours,
-          PTO: newTerms.PTO,
-          retirement: newTerms.retirement,
-          parentalLeave: newTerms.parentalLeave,
-          training: newTerms.training,
-          mentorship: newTerms.mentorship,
-          notes: newTerms.notes,
+          tenure,
+          salary,
+          insurance,
+          location,
+          flexibleHours,
+          PTO,
+          retirement,
+          parentalLeave,
+          training,
+          mentorship,
+          notes,
         },
         { new: true }
       );

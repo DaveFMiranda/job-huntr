@@ -3,14 +3,12 @@ import { QUERY_EMPLOYMENT_TERMS } from "../../utils/queries";
 
 const Terms = () => {
   const { loading, data } = useQuery(QUERY_EMPLOYMENT_TERMS);
-
-  const terms = data?.employmentTerms.employmentTerms;
-// console.log({user});
+  const terms = data?.employmentTerms;
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!data.employmentTerms.employmentTerms) {
+  if (!data.employmentTerms) {
     return <h4>Looks like there aren't any employment terms for this user.</h4>;
   }
 

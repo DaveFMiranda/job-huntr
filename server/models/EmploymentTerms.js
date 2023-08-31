@@ -4,7 +4,7 @@ const employmentTermsSchema = new Schema(
   {
     tenure: {
       type: String,
-      enum: ['full-time', 'part-time', 'temporary']
+      // enum: ['full-time', 'part-time', 'temporary']
     },
     salary: {
       type: Number,
@@ -14,7 +14,7 @@ const employmentTermsSchema = new Schema(
     },
     location: {
       type: String,
-      enum: ["in person", "hybrid", "remote"]
+      // enum: ["in person", "hybrid", "remote"]
     },
     flexibleHours: {
       type: Boolean
