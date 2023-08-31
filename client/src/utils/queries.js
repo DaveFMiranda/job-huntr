@@ -21,6 +21,7 @@ export const QUERY_JOB = gql`
       advertisedSalary
       offerMade
       contactPerson {
+        _id
         name
         role
         phone
@@ -28,6 +29,7 @@ export const QUERY_JOB = gql`
         notes
       }
       comLogArray {
+        _id
         method
         content
         direction
@@ -73,13 +75,6 @@ export const QUERY_ME = gql`
         advertisedSalary
         offerMade
         createdAt
-        contactPerson {
-          name
-          role
-          phone
-          email
-          notes
-        }
       }
       savedQuestions {
         question

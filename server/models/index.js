@@ -3,9 +3,9 @@ const Job = require('./Job');
 const CommonQuestions = require('./CommonQuestions')
 const ComLog = require('./ComLog');
 const EmploymentTerms = require('./EmploymentTerms');
+const Contact = require('./Contact')
 
 
-
-module.exports = { User, Job, ComLog, CommonQuestions, EmploymentTerms };
+module.exports = { User, Job, ComLog, Contact, CommonQuestions, EmploymentTerms };
 
 

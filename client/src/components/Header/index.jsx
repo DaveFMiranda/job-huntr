@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-
 import Auth from "../../utils/auth";
+import Logo from "/jobhuntrlogo.png?url"
 
 const Header = () => {
   const logout = (event) => {
@@ -12,16 +12,17 @@ const Header = () => {
       <div className="header-box">
         <div className="header-title">
           <Link className="text-light" to="/">
-            <h1 className="site-title">Job Huntr</h1>
+            <img src={Logo} alt="Job Huntr" />
           </Link>
           <p>Job search made easy!</p>
         </div>
         <div className="navbar-button">
           {Auth.loggedIn() ? (
             <>
-              <Link className="profile-button" to="/me">
-                {Auth.getProfile().data.username}'s profile
+              <Link className="profile-button" to="/">
+                Home
               </Link>
+
               <button className="logout-button" onClick={logout}>
                 Logout
               </button>

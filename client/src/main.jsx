@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Profile from "./pages/Profile";
+import Profile from "./pages/READONLYProfile";
 import ErrorPage from "./pages/ErrorPage";
 import AboutPage from "./pages/AboutPage.jsx";
 import CompanyPage from "./pages/CompanyPage.jsx";

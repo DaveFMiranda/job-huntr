@@ -2,6 +2,7 @@ const {
   User,
   Job,
   ComLog,
+  Contact,
   CommonQuestions,
   EmploymentTerms,
 } = require("../models");
@@ -21,7 +22,6 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
           .populate("savedJobs")
-          .populate("savedJobs.contactPerson")
           .populate("savedQuestions")
           .populate("employmentTerms");
       }
@@ -50,7 +50,11 @@ const resolvers = {
     terms: async (_parent, { _id }) => {
       return User.findOne({ _id }).populate("employmentTerms");
     },
+    contacts: async () => {
+      return Contact.find();
+    },
   },
+
 
   Mutation: {
     addUser: async (
@@ -86,7 +90,7 @@ const resolvers = {
     },
     addJob: async (
       parent,
-      { company, role, advertisedSalary, offerMade, contactPerson },
+      { company, role, advertisedSalary, offerMade },
       context
     ) => {
       if (!context.user) {
@@ -97,7 +101,6 @@ const resolvers = {
         role,
         advertisedSalary,
         offerMade,
-        contactPerson,
       });
 
       await User.findOneAndUpdate(
@@ -108,23 +111,47 @@ const resolvers = {
       return job;
     },
 
-    updateContactPerson: async (parent, { _id, contactPerson }) => {
-      const job = { _id, contactPerson };
+    addContactPerson: async (
+      parent,
+      { jobId, name, role, phone, email, notes }
+    ) => {
+      const contactPerson = await Contact.create({
+        name,
+        role,
+        phone,
+        email,
+        notes,
+      });
+
       await Job.findOneAndUpdate(
-        { _id: _id },
-        { contactPerson },
-        { new: true }
+        { _id: jobId },
+        { contactPerson: contactPerson._id },
+        { new: true, runValidators: true }
       );
-      return job.contactPerson;
+      return contactPerson;
     },
 
-    deleteContactPerson: async (parent, { _id }) => {
-      const deletedContactPerson = job.contactPerson;
-      await Job.findOneAndUpdate(
+    updateContactPerson: async (
+      parent,
+      { _id, name, role, phone, email, notes }
+    ) => {
+      const contactPerson = { _id, name, role, phone, email, notes };
+      await Contact.findOneAndUpdate(
         { _id: _id },
+        { name, role, phone, email, notes },
+        { new: true }
+      );
+      return contactPerson;
+    },
+
+    deleteContactPerson: async (parent, { contactId: _id, jobId }) => {
+      await Job.findOneAndUpdate(
+        { _id: jobId },
         { contactPerson: null },
         { new: true }
       );
+      const deletedContactPerson = await Contact.findOneAndDelete({ _id });
+
       return deletedContactPerson;
     },
 
@@ -180,14 +207,13 @@ const resolvers = {
 
     updateComLog: async (
       parent,
-      { _id, jobId, method, content, direction },
+      { _id, method, content, direction },
       context
     ) => {
       if (!context.user) {
         throw AuthenticationError;
       }
       const comLog = { _id, method, content, direction };
-
       await ComLog.findOneAndUpdate(
         { _id: _id },
         { method, content, direction },
@@ -195,6 +221,17 @@ const resolvers = {
       );
 
       return comLog;
+    },
+
+    deleteComLog: async (parent, { _id, jobId }) => {
+      const comLog = await ComLog.findOneAndDelete({ _id });
+
+      await Job.findOneAndUpdate(
+        { _id: jobId },
+        { $pull: { comLogArray: _id } }
+      );
+
+      return true;
     },
 
     addQuestion: async (_parent, { question, response }, context) => {
@@ -205,7 +242,7 @@ const resolvers = {
         question,
         response,
       });
-
+      
       await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { savedQuestions: newQuestion._id } },
@@ -213,6 +250,16 @@ const resolvers = {
       );
       console.log("new question added:", newQuestion);
       return newQuestion;
+    },
+
+    deleteQuestion: async (_parent, { _id, questionId }, context) => {
+      const question = await CommonQuestions.findOneAndDelete({ _id });
+
+      await CommonQuestions.findOneAndUpdate(
+        { _id: questionId },
+        { $pull: { questionArray: _id } }
+      );
+      return true;
     },
     updateQuestion: async (_parent, { _id, question, response }) => {
       const updatedQuestion = { _id, question, response };
@@ -224,8 +271,25 @@ const resolvers = {
 
       return updatedQuestion;
     },
-    addEmploymentTerms: async (parent, { employmentTerms }, context) => {
-      const savedTerms = await EmploymentTerms.create({ ...employmentTerms });
+    addEmploymentTerms: async (parent, { EmploymentTermsInput }, context) => {
+      const newTerms = { EmploymentTermsInput };
+      await EmploymentTerms.create(
+        {
+          tenure: EmploymentTermsInput.tenure,
+          salary: EmploymentTermsInput.salary,
+          insurance: EmploymentTermsInput.insurance,
+          location: EmploymentTermsInput.location,
+          flexibleHours: EmploymentTermsInput.flexibleHours,
+          PTO: EmploymentTermsInput.PTO,
+          retirement: EmploymentTermsInput.retirement,
+          parentalLeave: EmploymentTermsInput.parentalLeave,
+          training: EmploymentTermsInput.training,
+          mentorship: EmploymentTermsInput.mentorship,
+          notes: EmploymentTermsInput.notes,
+        },
+        { new: true }
+      );
+
       await User.findOneAndUpdate(
         { _id: context.user._id },
         // THIS might be an issue, might need to destructure ETI

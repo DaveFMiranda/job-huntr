@@ -16,22 +16,15 @@ const typeDefs = `
     role: String!
     advertisedSalary: Int
     offerMade: Boolean
-    contactPerson: ContactPerson
+    contactPerson: Contact
     comLogArray: [ComLog]!
     createdAt: String
     updatedAt: String
   }
 
-  type ContactPerson {
-    name: String!
-    role: String
-    phone: String
-    email: String
-    notes: String
-  }
-
-  input ContactPersonInput {
-    name: String!
+  type Contact {
+    _id: ID
+    name: String
     role: String
     phone: String
     email: String
@@ -95,7 +88,8 @@ const typeDefs = `
     question(_id: ID): CommonQuestions
     comLogs: [ComLog]
     comLog(_id: ID): ComLog
-    terms(_id: ID): User
+    employmentTerms(_id: ID): EmploymentTerms
+    contacts: [Contact]
   }
 
   type Mutation {
@@ -105,11 +99,11 @@ const typeDefs = `
       company: String!
       role: String!
       advertisedSalary: Int
-      contactPerson: ContactPersonInput
       offerMade: Boolean
       ): Job
     addQuestion(question: String!, response: String!): CommonQuestions
     updateQuestion(_id: ID!, question: String!, response: String!): CommonQuestions
+    deleteQuestion(_id: ID!): Boolean
     updateJob(_id: ID!, company: String, advertisedSalary: Int, role: String, offerMade: Boolean): Job
     deleteJob(_id: ID!): Boolean
     addComLog(
@@ -119,8 +113,16 @@ const typeDefs = `
       direction: String!
       ): ComLog
     updateComLog(_id: ID!, method: String, content: String, direction: String): ComLog
-    updateContactPerson(_id: ID!, contactPerson: ContactPersonInput): Job
-    deleteContactPerson(_id: ID!): Boolean
+    deleteComLog(_id: ID!, jobId: String!): Boolean
+    addContactPerson(
+      jobId: String
+      name: String
+      role: String
+      phone: String
+      email: String
+      notes: String): Contact
+    updateContactPerson(_id: ID!, name: String, role: String, phone: String, email: String, notes: String): Contact
+    deleteContactPerson(_id: ID!, jobId: String!): Boolean
     addEmploymentTerms(employmentTerms: EmploymentTermsInput): EmploymentTerms
   }
 `;

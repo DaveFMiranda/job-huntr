@@ -37,7 +37,7 @@ const UpdateJobForm = ({jobId}) => {
 
   return (
     <div>
-      <h3>Update This Job</h3>
+     
       {Auth.loggedIn() ? (
         <>
           <form onSubmit={handleFormSubmit}>
@@ -87,8 +87,8 @@ const UpdateJobForm = ({jobId}) => {
             </div>
 
             <div className="form-group">
-              <button className="btn btn-primary" type="submit">
-                Update Job
+              <button className="job-update-button" type="submit">
+                Edit Job
               </button>
             </div>
 

@@ -42,26 +42,17 @@ export const ADD_JOB = gql`
     $role: String!
     $advertisedSalary: Int
     $offerMade: Boolean
-    $contactPerson: ContactPersonInput
   ) {
     addJob(
       company: $company
       role: $role
       advertisedSalary: $advertisedSalary
       offerMade: $offerMade
-      contactPerson: $contactPerson
     ) {
       _id
       company
       role
       advertisedSalary
-      contactPerson {
-        name
-        role
-        phone
-        email
-        notes
-      }
       offerMade
       createdAt
     }
@@ -93,6 +84,59 @@ export const DELETE_JOB = gql`
   }
 `;
 
+export const ADD_CONTACT_PERSON = gql`
+  mutation addContactPerson(
+    $jobId: String
+    $name: String
+    $role: String
+    $phone: String
+    $email: String
+    $notes: String
+    ){
+      addContactPerson(
+        jobId: $jobId
+        name: $name
+        role: $role
+        phone: $phone
+        email: $email
+        notes: $notes
+      ){
+        name
+        role
+        phone
+        email
+        notes
+      }
+    }
+`;
+
+export const UPDATE_CONTACT_PERSON = gql`
+mutation updateContactPerson(
+  $_id: ID!
+  $name: String
+  $role: String
+  $phone: String
+  $email: String
+  $notes: String
+){
+  updateContactPerson(_id: $_id, name: $name, role: $role, phone: $phone, email: $email, notes: $notes){
+    name
+    role
+    phone
+    email
+    notes
+  }
+
+}
+`;
+
+export const DELETE_CONTACT_PERSON = gql`
+  mutation deleteContactPerson($_id: ID!, $jobId: String!) {
+    deleteContactPerson(_id: $_id, jobId: $jobId)
+  }
+`;
+
+
 export const ADD_COMLOG = gql`
   mutation addComLog(
     $jobId: String!
@@ -111,8 +155,7 @@ export const ADD_COMLOG = gql`
     method
     content
     direction
-    createdAt
-    updatedAt
+
   }}
 
 `;
@@ -135,10 +178,15 @@ export const UPDATE_COMLOG = gql`
     method
     content
     direction
-    createdAt
-    updatedAt
+   
   }}
 
+`;
+
+export const DELETE_COMLOG = gql`
+  mutation deleteComLog($_id: ID!, $jobId: String!) {
+    deleteComLog(_id: $_id, jobId: $jobId)
+  }
 `;
 
 export const ADD_QUESTION = gql`
@@ -148,6 +196,12 @@ export const ADD_QUESTION = gql`
       question
       response
     }
+  }
+`;
+
+export const DELETE_QUESTION = gql`
+  mutation deleteQuestion($_id: ID!) {
+    deleteQuestion(_id: $_id)
   }
 `;
 

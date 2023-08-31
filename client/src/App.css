@@ -7,7 +7,9 @@ html {
 
 .navlinks-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
   margin-bottom: 0px;
   height: 100%;
 }
@@ -374,6 +376,7 @@ body {
   position: absolute;
   margin-top: 0.5rem;
   margin-left: 0.5rem;
+  
 }
 
 .form-input {
@@ -460,18 +463,21 @@ body {
   margin: 20px 0;
 }
 
-.about-container {
-  display: flex;
-  justify-content: center;
+.developers {
+  
   flex-wrap: wrap;
-  margin-top: 5rem;
+  margin-top: 1rem;
   color: #ffff;
 }
 
-.about-title h2 {
+
+.about-title {
+  display: flex;
+  justify-content: center;
   color: #ffffff;
-  font-size: 3rem;
-  animation: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  margin: 80px;
+  font-size: 48px;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .dev-name {
@@ -482,7 +488,8 @@ body {
 }
 
 .dev-pic img {
-  flex-wrap: wrap;
+  display: flex;
+  
   width: 200px;
   height: auto;
   border-radius: 2px;
@@ -535,6 +542,7 @@ span {
   align-items: center;
   font-size: 2rem;
   background-color: #000000;
+  
 }
 
 #error-page p {
@@ -566,6 +574,8 @@ span {
 .job-expand-button,
 .job-delete-button,
 .job-update-button,
+.contact-update-button,
+.contact-delete-button,
 .job-collapse-button {
   display: inline-block;
   padding: 15px 25px;
@@ -581,16 +591,25 @@ span {
   transition: 0.4s ease-in;
 }
 .job-expand-button:hover,
-.job-collapse-button:hover {
+.job-update-button:hover,
+.job-collapse-button:hover,
+.job-expand-button:hover,
+.job-delete-button:hover {
   background-color: #a180c8;
   color: #7340ad;
   transition: ease-in;
 }
 
 .job-expand-button:active,
-.job-collapse-button:active {
+.job-collapse-button:active,
+.job-expand-button:active {
   background-color: #7340ad;
   color: #7340ad;
+}
+
+.add-job-body input {
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .profile-view-container {
@@ -720,6 +739,8 @@ span {
   border-radius: 5px;
   margin: 40px;
   padding: 15px;
+  width: auto;
+  margin-left: 5rem;
 }
 
 .page-header {
@@ -743,24 +764,27 @@ span {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 5px;
+  /* margin-left: 5px; */
   margin-top: 30px;
   margin-bottom: 15px;
 }
 
+
 .question {
-  font-size: 22px;
+  font-size: 28px;
   color: white;
   margin-bottom: 5px;
+  
 }
 
 .answer {
-  font-size: 20px;
+  font-size: 23px;
 }
 
 .add-question {
-  display: inline-block;
-  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  padding: 7px 8px;
   background-color: #7340ad;
   color: white;
   text-decoration: none;
@@ -780,11 +804,6 @@ span {
   color: white;
 }
 
-.add-question::before {
-  content: "\002B";
-  font-size: 25px;
-  color: white;
-}
 
 .add-question:hover {
   background-color: #a180c8;
@@ -793,7 +812,7 @@ span {
 }
 
 .edit {
-  font-size: small;
+  font-size: smaller;
   padding: 10px 10px;
   background-color: #7340ad;
   color: white;
@@ -807,7 +826,7 @@ span {
 }
 
 .delete {
-  font-size: small;
+  font-size: smaller;
   padding: 10px 10px;
   background-color: #7340ad;
   color: white;
@@ -817,6 +836,13 @@ span {
   border-radius: 3px;
   font-weight: 700;
   transition: 0.4s ease-in;
+}
+
+.delete:hover,
+ .edit:hover {
+  background-color: #a180c8;
+  color: white;
+  transition: ease-in;
 }
 
 /*ADD QUESTION PAGE*/
@@ -871,29 +897,69 @@ span {
 .jobs {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
   background-color: white;
+  width: auto;
 }
 
 .jobs td, .jobs th {
-  border: 1px solid #ddd;
+  border: 1px solid #ffffff;
   padding: 8px;
+  font-size: 1.3rem;
 }
 
 .jobs tr:nth-child(even){background-color: #f2f2f2;}
 
-.jobs tr:hover {background-color: #ddd;}
+.jobs tr:hover {background-color: #ddd;
+}
 
 .jobs th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
   background-color: #7340ad;
   color: white;
 }
 
-.checkbox {
-  background-color: purple;
+.jobs tr td .custom-checkbox {
+ margin-left: 25px;
+}
+
+.offer-form-group:checked {
+  color: #ffffff;
+  background-color: #7340ad;
+  border: 2px solid #a180c8;
+}
+
+.custom-checkbox {
+  margin-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  background-color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.custom-checkbox:checked {
+  color: #ffffff;
+  background-color: #7340ad;
+  border: 2px solid #a180c8;
+}
+
+.custom-checkbox::before {
+  content: '\2714';
+  transform: translate();
+  opacity: 0;
+}
+
+.custom-checkbox:checked:before {
+  opacity: 1;
 }
 
 /**
@@ -1867,12 +1933,8 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #a180c8;
+  background-color: #7340ad;
   color: #d9e9e8;
-}
-
-.btn.btn-primary:hover {
-  background-color: #57779a;
 }
 
 .btn.btn-danger {
@@ -1934,10 +1996,6 @@ a:hover {
   color: #ffffff;
 }
 
-.btn.btn-link:hover {
-  background-color: #31a9e1;
-}
-
 .card {
   border: 1px solid #1a1a1a;
   margin-bottom: 1rem;
@@ -1966,14 +2024,29 @@ a:hover {
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
+.add-job {
+  display: flex;
+  justify-content: center;
+}
+
 form {
+  
+  color: #a180c8;
+  background-color: #00000055;
+  border-radius: 5px;
+  justify-content: center;
+  flex-direction: column;
   width: 100%;
 }
 
 form .form-group {
-  display: block;
+  display:block;
   width: 100%;
-  margin: 0.625rem 0;
+  margin: 1rem;
+}
+.form-group {
+ font-size: 1.5rem;
+ 
 }
 
 form .form-input,
@@ -2000,7 +2073,8 @@ form .form-label {
 form .form-input {
   width: 100%;
   padding: 0.75rem;
-  color: #1a1a1a;
+  color: #000000;
+
   background-color: #ffffff;
   margin: 0.625rem 0;
   font-size: 1.2rem;
@@ -2020,6 +2094,12 @@ form [type="radio"] {
 label form [type="checkbox"],
 label form [type="radio"] {
   display: inline-block;
+  
+}
+
+.update-job-header {
+  display: flex;
+  justify-content: center;
 }
 
 .container {
