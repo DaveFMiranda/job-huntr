@@ -1,24 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { ADD_JOB } from "../../utils/mutations";
+import { UPDATE_JOB } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
-
-const JobForm = () => {
+//Need to pass jobId in as a prop
+const UpdateJobForm = ({jobId}) => {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [advertisedSalary, setAdvertisedSalary] = useState("");
   const [offerMade, setOfferMade] = useState(false);
 
-  const [addJob, { error }] = useMutation(ADD_JOB);
+  const [updateJob, { error }] = useMutation(UPDATE_JOB);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addJob({
+      const { data } = await updateJob({
         variables: {
+          jobId,
           company,
           role,
           advertisedSalary: parseInt(advertisedSalary, 10),
@@ -36,7 +37,7 @@ const JobForm = () => {
 
   return (
     <div>
-      
+      <h3>Update This Job</h3>
       {Auth.loggedIn() ? (
         <>
           <form onSubmit={handleFormSubmit}>
@@ -87,7 +88,7 @@ const JobForm = () => {
 
             <div className="form-group">
               <button className="btn btn-primary" type="submit">
-                Add Job
+                Update Job
               </button>
             </div>
 
@@ -98,7 +99,7 @@ const JobForm = () => {
         </>
       ) : (
         <p>
-          You need to be logged in to add a job. Please{" "}
+          You need to be logged in to update a job. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
@@ -106,4 +107,4 @@ const JobForm = () => {
   );
 };
 
-export default JobForm;
+export default UpdateJobForm;

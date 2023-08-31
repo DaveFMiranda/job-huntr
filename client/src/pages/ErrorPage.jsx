@@ -1,4 +1,5 @@
 import { useRouteError } from "react-router-dom";
+import mario from "../../public/mario.png?url";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -6,11 +7,14 @@ export default function ErrorPage() {
 
   return (
     <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
+      <img src={mario} alt="Description of the image" style={{
+        width: "auto",
+        height: "100vh"
+      }
+}/>
+     
+        {/* <i>{error.statusText || error.message}</i> */}
+      
     </div>
   );
 }

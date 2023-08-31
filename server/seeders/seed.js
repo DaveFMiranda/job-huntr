@@ -13,6 +13,13 @@ db.once('open', async () => {
 
     await cleanDB('ComLog', 'comlogs');
 
+    await cleanDB('CommonQuestions', 'commonquestions');
+
+    await cleanDB('Contact', 'contacts');
+
+    await cleanDB('EmploymentTerms', 'employmentterms');
+
+
 
     await User.create(userSeeds);
 

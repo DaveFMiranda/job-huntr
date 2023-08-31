@@ -31,28 +31,8 @@ const jobSchema = new Schema(
       type: Boolean,
     },
     contactPerson: {
-      name: {
-        type: String,
-        required: true,
-      },
-      role: {
-        type: String,
-        required: false,
-      },
-      phone: {
-        type: String,
-        match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
-        required: false,
-      },
-      email: {
-        type: String,
-        required: false,
-        match: [/.+@.+\..+/, "Must use a valid email address"],
-      },
-      notes: {
-        type: String,
-        required: false,
-      },
+      type: Schema.Types.ObjectId,
+      ref: "Contact",
     },
     comLogArray: [
       {
@@ -60,11 +40,10 @@ const jobSchema = new Schema(
         ref: "ComLog",
       },
     ],
-    default: []
+    default: [],
   },
 
-  { timeStamp: true }
-  
+  { timestamps: true }
 );
 
 const Job = model("Job", jobSchema);

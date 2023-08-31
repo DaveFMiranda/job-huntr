@@ -42,61 +42,111 @@ export const ADD_JOB = gql`
     $role: String!
     $advertisedSalary: Int
     $offerMade: Boolean
-    $contactPerson: ContactPersonInput
   ) {
     addJob(
       company: $company
       role: $role
       advertisedSalary: $advertisedSalary
       offerMade: $offerMade
-      contactPerson: $contactPerson
     ) {
       _id
       company
       role
       advertisedSalary
-      contactPerson {
+      offerMade
+      createdAt
+    }
+  }
+`;
+
+export const UPDATE_JOB = gql`
+  mutation updateJob(
+    $jobId: ID!
+    $company: String
+    $advertisedSalary: Int
+    $role: String
+    $offerMade: Boolean
+  ) {
+    updateJob(_id: $jobId, company: $company, advertisedSalary: $advertisedSalary, role: $role, offerMade: $offerMade) {
+      company
+      role
+      advertisedSalary
+      offerMade
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const DELETE_JOB = gql`
+  mutation deleteJob($_id: ID!) {
+    deleteJob(_id: $_id)
+  }
+`;
+
+export const ADD_CONTACT_PERSON = gql`
+  mutation addContactPerson(
+    $jobId: String
+    $name: String
+    $role: String
+    $phone: String
+    $email: String
+    $notes: String
+    ){
+      addContactPerson(
+        jobId: $jobId
+        name: $name
+        role: $role
+        phone: $phone
+        email: $email
+        notes: $notes
+      ){
         name
         role
         phone
         email
         notes
       }
-      offerMade
-      createdAt
     }
+`;
+
+export const UPDATE_CONTACT_PERSON = gql`
+mutation updateContactPerson(
+  $_id: ID!
+  $name: String
+  $role: String
+  $phone: String
+  $email: String
+  $notes: String
+){
+  updateContactPerson(_id: $_id, name: $name, role: $role, phone: $phone, email: $email, notes: $notes){
+    name
+    role
+    phone
+    email
+    notes
+  }
+
+}
+`;
+
+export const DELETE_CONTACT_PERSON = gql`
+  mutation deleteContactPerson($_id: ID!, $jobId: String!) {
+    deleteContactPerson(_id: $_id, jobId: $jobId)
   }
 `;
 
-
-export const UPDATE_JOB = gql`
-  mutation updateJob(
-    $_id: ID!, 
-    $company: String, 
-    $role: String, 
-    $offer: Boolean
-    ) {
-    updateJob(
-      _id: $_id
-      company: $company
-      role: $role
-      offer: $offer
-    ) {
-      company
-      role
-      offerMade
-      createdAt
-    }
-  }
-`;
 
 export const ADD_COMLOG = gql`
   mutation addComLog(
+    $jobId: String!
     $method: String!
     $content: String!
     $direction: String!
+
   ){
   addComLog(
+    jobId: $jobId
     method: $method
     content: $content
     direction: $direction
@@ -105,23 +155,87 @@ export const ADD_COMLOG = gql`
     method
     content
     direction
+
   }}
+
 `;
 
+export const UPDATE_COMLOG = gql`
+  mutation updateComLog(
+    $_id: ID!
+    $method: String!
+    $content: String!
+    $direction: String!
 
-// NOTE: delete this one it's from the source code
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
+  ){
+  updateComLog(
+    _id: $_id
+    method: $method
+    content: $content
+    direction: $direction
+  ){
+    _id
+    method
+    content
+    direction
+   
+  }}
+
+`;
+
+export const DELETE_COMLOG = gql`
+  mutation deleteComLog($_id: ID!, $jobId: String!) {
+    deleteComLog(_id: $_id, jobId: $jobId)
+  }
+`;
+
+export const ADD_QUESTION = gql`
+  mutation addQuestion($question: String!, $response: String!) {
+    addQuestion(question: $question, response: $response) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+      question
+      response
     }
   }
 `;
+
+export const UPDATE_QUESTION = gql`
+mutation updateQuestion(
+  $question: String!
+  $response: String!
+){
+  updateQuestion(
+    question: $question
+    response: $response
+  ){
+    _id
+    question
+    response
+
+  }}
+`;
+
+export const ADD_TERMS = gql`
+  mutation addEmploymentTerms(
+    $employmentTerms: EmploymentTermsInput
+  ){
+    addEmploymentTerms(
+      employmentTerms: $employmentTerms
+    ){
+      _id
+      tenure
+      salary
+      insurance
+      location
+      flexibleHours
+      PTO
+      retirement
+      parentalLeave
+      training
+      mentorship
+      notes
+    }
+  }
+`;
+
+

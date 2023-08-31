@@ -1,15 +1,23 @@
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from './App.jsx';
-import Home from './pages/Home';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import ErrorPage from './pages/ErrorPage';
-import AboutPage from './pages/AboutPage.jsx';
-import CompanyPage from './pages/CompanyPage.jsx';
-import ContactPage from './pages/ContactPage.jsx'
+import App from "./App.jsx";
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Profile from "./pages/READONLYProfile";
+import ErrorPage from "./pages/ErrorPage";
+import AboutPage from "./pages/AboutPage.jsx";
+import CompanyPage from "./pages/CompanyPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+import CommonQuestions from "./pages/CommonQuestions.jsx";
+import QuestionUpdate from "./components/QuestionUpdate/index.jsx";
+//test pages - DELETE IF NOT USING
+import FAQ from "./pages/FAQ.jsx";
+import AddQuestion from "./pages/AddQuestion.jsx";
+import JobTracker from "./pages/JobTracker.jsx";
+import Jobs from "./pages/Jobs.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -19,37 +27,51 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
-      }, {
-        path: '/login',
-        element: <Login />
+        element: <Home />,
       },
       {
-        path: '/AboutPage',
-        element: <AboutPage />
-      }, 
+        path: "/AboutPage",
+        element: <AboutPage />,
+      },
+      { path: "/ContactPage", element: <ContactPage /> },
       {
-        path: '/CompanyPage',
-        element: <CompanyPage />
-      }, 
-      {
-        path: '/ContactPage',
-        element: <ContactPage />
+        path: "/login",
+        element: <Login />,
       },
       {
-        path: '/signup',
-        element: <Signup />
-      }, {
-        path: '/profiles/:username',
-        element: <Profile />
-      }, {
-        path: '/me',
-        element: <Profile />
-      }, 
-    ]
+        path: "/CompanyPage",
+        element: <CompanyPage />,
+      },
+      {
+        path: "/CommonQuestions",
+        element: <CommonQuestions />,
+      },
+      // wireframe pages - DELETE IF NOT USING
+      { path: "/FAQ", element: <FAQ /> },
+      { path: "/AddQuestion", element: <AddQuestion />},
+      { path: "/JobTracker", element: <JobTracker />},
+      { path: "/Jobs", element: <Jobs />},
+      //
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/updatequestion/:id",
+        element: <QuestionUpdate />,
+      },
+      {
+        path: "/updatequestion/:id",
+        element: <QuestionUpdate />,
+      },
+      {
+        path: "/me",
+        element: <Profile />,
+      },
+    ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
-)
+);

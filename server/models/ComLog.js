@@ -19,7 +19,7 @@ const comLogSchema = new Schema(
     },
   },
 
-  { timestamps: true }
+  { timestamps: true } // createdAt, updatedAt
 );
 
 const ComLog = model("ComLog", comLogSchema);
