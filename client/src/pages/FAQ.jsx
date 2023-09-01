@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_QUESTION } from "../utils/queries";
 import { LuPencil as PencilIcon } from "react-icons/lu";
 import { BsTrash3 as TrashIcon } from "react-icons/bs";
+import { DELETE_QUESTION } from "../utils/mutations";
 
 const FAQ = () => {
   const { loading, data } = useQuery(QUERY_QUESTION);
+  const [deleteQuestion] = useMutation(DELETE_QUESTION)
   const navigate = useNavigate();
+  const handleQuestionDelete = (questionId) => {
+    deleteQuestion({ variables: { _id: questionId } });
+  };
 
   if (loading) return <p>Loading...</p>;
 
@@ -29,7 +34,7 @@ const FAQ = () => {
                 <button className="edit">
                   <PencilIcon />
                 </button>
-                <button className="delete">
+                <button className="delete" onClick={() => handleQuestionDelete(item._id)}>
                   <TrashIcon />
                 </button>
               </span>

@@ -17,7 +17,7 @@ import FAQ from "./pages/FAQ.jsx";
 import AddQuestion from "./pages/AddQuestion.jsx";
 import JobTracker from "./pages/JobTracker.jsx";
 import Jobs from "./pages/Jobs.jsx";
-
+import Job from "./components/Job";
 
 const router = createBrowserRouter([
   {
@@ -48,9 +48,14 @@ const router = createBrowserRouter([
       },
       // wireframe pages - DELETE IF NOT USING
       { path: "/FAQ", element: <FAQ /> },
-      { path: "/AddQuestion", element: <AddQuestion />},
-      { path: "/JobTracker", element: <JobTracker />},
-      { path: "/Jobs", element: <Jobs />},
+      { path: "/AddQuestion", element: <AddQuestion /> },
+      { path: "/JobTracker", element: <JobTracker /> },
+      {
+        path: "/JobTracker/:jobId",
+        element: <Job />,
+      },
+
+      { path: "/Jobs", element: <Jobs /> },
       //
       {
         path: "/signup",

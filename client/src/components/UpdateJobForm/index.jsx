@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UPDATE_JOB } from "../../utils/mutations";
+import { QUERY_ME } from "../../utils/queries";
 
 import Auth from "../../utils/auth";
 //Need to pass jobId in as a prop
@@ -11,7 +12,10 @@ const UpdateJobForm = ({jobId}) => {
   const [advertisedSalary, setAdvertisedSalary] = useState("");
   const [offerMade, setOfferMade] = useState(false);
 
-  const [updateJob, { error }] = useMutation(UPDATE_JOB);
+  const [updateJob, { error }] = useMutation(UPDATE_JOB, {refetchQueries: [
+    QUERY_ME,
+    'me'
+  ]});
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -37,7 +41,7 @@ const UpdateJobForm = ({jobId}) => {
 
   return (
     <div>
-      <h3>Update This Job</h3>
+     
       {Auth.loggedIn() ? (
         <>
           <form onSubmit={handleFormSubmit}>
@@ -87,8 +91,8 @@ const UpdateJobForm = ({jobId}) => {
             </div>
 
             <div className="form-group">
-              <button className="btn btn-primary" type="submit">
-                Update Job
+              <button className="job-update-button" type="submit">
+                Edit Job
               </button>
             </div>
 

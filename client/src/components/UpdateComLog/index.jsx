@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { UPDATE_COMLOG } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+import { QUERY_JOB } from "../../utils/queries";
+
 
 const UpdateComLog = ({ _id }) => {
   const [method, setMethod] = useState("");
   const [content, setContent] = useState("");
   const [direction, setDirection] = useState("");
 
-  const [updateComLog, { error }] = useMutation(UPDATE_COMLOG);
+  const [updateComLog, { error }] = useMutation(UPDATE_COMLOG, {refetchQueries: [
+    QUERY_JOB,
+    'job'
+  ]});
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

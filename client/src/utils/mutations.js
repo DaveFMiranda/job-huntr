@@ -199,6 +199,12 @@ export const ADD_QUESTION = gql`
   }
 `;
 
+export const DELETE_QUESTION = gql`
+  mutation deleteQuestion($_id: ID!) {
+    deleteQuestion(_id: $_id)
+  }
+`;
+
 export const UPDATE_QUESTION = gql`
 mutation updateQuestion(
   $question: String!

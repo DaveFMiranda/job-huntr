@@ -3,7 +3,7 @@ import {ADD_COMLOG} from '../../utils/mutations';
 import {useMutation} from "@apollo/client";
 import UpdateComLog from "../UpdateComLog"
 import {DELETE_COMLOG} from '../../utils/mutations';
-
+import {QUERY_JOB} from '../../utils/queries';
 
 const ComLog = ({ comLogs = [], jobId }) => {
   const [method, setMethod] = useState("");
@@ -11,8 +11,14 @@ const ComLog = ({ comLogs = [], jobId }) => {
   const [direction, setDirection] = useState("");
   const [updatedComLogId, setUpdatedComLogId] = useState(null);
 
-  const [addComLog, { error }] = useMutation(ADD_COMLOG);
-  const [deleteComLog] = useMutation(DELETE_COMLOG);
+  const [addComLog, { error }] = useMutation(ADD_COMLOG, {refetchQueries: [
+    QUERY_JOB,
+    'job'
+  ]});
+  const [deleteComLog] = useMutation(DELETE_COMLOG, {refetchQueries: [
+    QUERY_JOB,
+    'job'
+  ]});
 
 
   const handleComLogUpdate = (_id) => {
@@ -126,7 +132,7 @@ const ComLog = ({ comLogs = [], jobId }) => {
                 >
                   Delete This Communication
                 </button>
-        {updatedComLogId && <UpdateComLog _id={updatedComLogId} />}
+        {updatedComLogId === comLog._id && <UpdateComLog _id={updatedComLogId} />}
 
               </li>
             );

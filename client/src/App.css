@@ -9,6 +9,7 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 10px;
   margin-bottom: 0px;
   height: 100%;
 }
@@ -375,6 +376,7 @@ body {
   position: absolute;
   margin-top: 0.5rem;
   margin-left: 0.5rem;
+  
 }
 
 .form-input {
@@ -464,7 +466,7 @@ body {
 .developers {
   
   flex-wrap: wrap;
-  margin-top: 5rem;
+  margin-top: 1rem;
   color: #ffff;
 }
 
@@ -473,8 +475,9 @@ body {
   display: flex;
   justify-content: center;
   color: #ffffff;
-  font-size: 3rem;
-  animation: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  margin: 80px;
+  font-size: 48px;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .dev-name {
@@ -539,6 +542,7 @@ span {
   align-items: center;
   font-size: 2rem;
   background-color: #000000;
+  
 }
 
 #error-page p {
@@ -601,6 +605,11 @@ span {
 .job-expand-button:active {
   background-color: #7340ad;
   color: #7340ad;
+}
+
+.add-job-body input {
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .profile-view-container {
@@ -730,6 +739,8 @@ span {
   border-radius: 5px;
   margin: 40px;
   padding: 15px;
+  width: auto;
+  margin-left: 5rem;
 }
 
 .page-header {
@@ -788,7 +799,7 @@ span {
 }
 
 .add-question::before {
-  content: "\002B";
+  /* content: "\002B"; */
   font-size: 25px;
   color: white;
 }
@@ -886,13 +897,14 @@ span {
 .jobs {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
   background-color: white;
+  width: auto;
 }
 
 .jobs td, .jobs th {
   border: 1px solid #ffffff;
   padding: 8px;
+  font-size: 1.3rem;
 }
 
 .jobs tr:nth-child(even){background-color: #f2f2f2;}
@@ -911,12 +923,11 @@ span {
  margin-left: 25px;
 }
 
-/* .jobs .checkbox tr {
-  background-color: purple;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+.offer-form-group:checked {
+  color: #ffffff;
+  background-color: #7340ad;
+  border: 2px solid #a180c8;
+}
 
 .custom-checkbox {
   margin-right: 2rem;
@@ -942,13 +953,47 @@ span {
 }
 
 .custom-checkbox::before {
-  content: '\2713';
+  content: '\2714';
   transform: translate();
   opacity: 0;
 }
 
 .custom-checkbox:checked:before {
   opacity: 1;
+}
+
+.single-job-container {
+  background-color: #00000055;
+  border-radius: 5px;
+}
+
+.single-job-title {
+  display: flex;
+  justify-content: center;
+  background-color: #7340ad;
+  width: 100%;
+  padding: 20px;
+  padding-left: 40px;
+  margin-right: 50px ;
+} 
+
+.single-job-details {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.single-job-details h2{
+  display: flex
+}
+
+.single-job-details p {
+  font-size: 22px;
+}
+
+.magnify-icon {
+  display: flex;
+  font-size: 2rem;
+  color: #a180c8;
 }
 
 /**
@@ -1922,12 +1967,8 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #a180c8;
+  background-color: #7340ad;
   color: #d9e9e8;
-}
-
-.btn.btn-primary:hover {
-  background-color: #57779a;
 }
 
 .btn.btn-danger {
@@ -1989,10 +2030,6 @@ a:hover {
   color: #ffffff;
 }
 
-.btn.btn-link:hover {
-  background-color: #31a9e1;
-}
-
 .card {
   border: 1px solid #1a1a1a;
   margin-bottom: 1rem;
@@ -2027,13 +2064,12 @@ a:hover {
 }
 
 form {
+  
   color: #a180c8;
   background-color: #00000055;
   border-radius: 5px;
-  display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-left: 25rem;
   width: 100%;
 }
 
@@ -2047,11 +2083,9 @@ form .form-group {
  
 }
 
-
 form .form-input,
 form .form-textarea {
   display: block;
- 
 }
 
 form select {
@@ -2073,7 +2107,8 @@ form .form-label {
 form .form-input {
   width: 100%;
   padding: 0.75rem;
-  color: #ffff;
+  color: #000000;
+
   background-color: #ffffff;
   margin: 0.625rem 0;
   font-size: 1.2rem;
@@ -2093,6 +2128,12 @@ form [type="radio"] {
 label form [type="checkbox"],
 label form [type="radio"] {
   display: inline-block;
+  
+}
+
+.update-job-header {
+  display: flex;
+  justify-content: center;
 }
 
 .container {

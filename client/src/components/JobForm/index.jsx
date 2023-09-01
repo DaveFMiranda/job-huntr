@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_JOB } from "../../utils/mutations";
+import { QUERY_ME } from "../../utils/queries";
+
 
 import Auth from "../../utils/auth";
 
@@ -11,7 +13,11 @@ const JobForm = () => {
   const [advertisedSalary, setAdvertisedSalary] = useState("");
   const [offerMade, setOfferMade] = useState(false);
 
-  const [addJob, { error }] = useMutation(ADD_JOB);
+  const [addJob, { error }] = useMutation(ADD_JOB, {refetchQueries: [
+    QUERY_ME,
+    'me'
+
+  ]});
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

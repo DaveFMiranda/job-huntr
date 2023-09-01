@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_CONTACT_PERSON } from "../../utils/mutations";
+import { QUERY_JOB } from "../../utils/queries";
+
 
 import Auth from "../../utils/auth";
 
@@ -12,7 +14,10 @@ const ContactPersonForm = ({jobId}) => {
   const [email, setContactPersonEmail] = useState("");
   const [notes, setContactPersonNotes] = useState("");
 
-  const [addContactPerson, { error }] = useMutation(ADD_CONTACT_PERSON);
+  const [addContactPerson, { error }] = useMutation(ADD_CONTACT_PERSON, {refetchQueries: [
+    QUERY_JOB,
+    'job'
+  ]});
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

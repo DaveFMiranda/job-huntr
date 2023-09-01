@@ -1,4 +1,4 @@
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import formatTimestamp from "../utils/date";
@@ -14,10 +14,15 @@ const JobTracker = () => {
   const [addButton, setAddButton] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
   const [updatedJobId, setUpdatedJobId] = useState(null);
-  const [deleteJob] = useMutation(DELETE_JOB);
+  const [deleteJob] = useMutation(DELETE_JOB, {refetchQueries: [
+    QUERY_ME,
+    'me'
+  ]});
 
+
+  const navigate= useNavigate();
   const handleJobClick = (jobId) => {
-    setSelectedJobId(jobId);
+    navigate(jobId)
   };
 
   const handleJobUpdate = (jobId) => {
@@ -51,7 +56,8 @@ const JobTracker = () => {
   return (
     <div className="page-container">
       <h3 className="page-header">
-        Viewing {userParam ? `${user.username}'s` : "your"} saved jobs
+        Job Tracker
+        {/* Viewing {userParam ? `${user.username}'s` : "your"} saved jobs */}
       </h3>
       <table className="jobs">
         <tr>
@@ -76,21 +82,21 @@ const JobTracker = () => {
                   onClick={() => handleJobClick(job._id)}
                   style={{}}
                 >
-                  See More Info
+                  Details
                 </button>
                 <button
                   className="job-update-button"
                   onClick={() => handleJobUpdate(job._id)}
                   style={{}}
                 >
-                  Update This Job
+                  Edit
                 </button>
                 <button
                   className="job-delete-button"
                   onClick={() => handleJobDelete(job._id)}
                   style={{}}
                 >
-                  Delete This Job
+                  Delete
                 </button>
               </td>
             </tr>
@@ -100,10 +106,13 @@ const JobTracker = () => {
       <button className="add-question" onClick={() => setAddButton(!addButton)}>
         Add A Job
       </button>
-      <h3 className="add-job">Add a Job</h3>
+      <div className="add-job-body">
+      
       {addButton && <JobForm />}
       {selectedJobId && <Job jobId={selectedJobId} />}
+      
       {updatedJobId && <UpdateJobForm jobId={updatedJobId} />}
+      </div>
     </div>
   );
 };

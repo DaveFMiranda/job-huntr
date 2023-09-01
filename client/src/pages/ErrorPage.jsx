@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import mario from "../../public/mario.png?url";
+import mario from "/mario.png?url";
 
 export default function ErrorPage() {
   const error = useRouteError();
