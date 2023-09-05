@@ -8,7 +8,10 @@ import { DELETE_QUESTION } from "../utils/mutations";
 
 const FAQ = () => {
   const { loading, data } = useQuery(QUERY_QUESTION);
-  const [deleteQuestion] = useMutation(DELETE_QUESTION)
+  const [deleteQuestion] = useMutation(DELETE_QUESTION, {refetchQueries: [
+    QUERY_QUESTION,
+    'questions'
+  ]})
   const navigate = useNavigate();
   const handleQuestionDelete = (questionId) => {
     deleteQuestion({ variables: { _id: questionId } });
@@ -31,10 +34,8 @@ const FAQ = () => {
             <div className="question-container">
               <span className="question">
                 {item.question}
-                <button className="edit">
-                  <PencilIcon />
-                </button>
-                <button className="delete" onClick={() => handleQuestionDelete(item._id)}>
+               
+                &nbsp;<button className="delete" onClick={() => handleQuestionDelete(item._id)}>
                   <TrashIcon />
                 </button>
               </span>
@@ -44,7 +45,7 @@ const FAQ = () => {
         ))}
       </ul>
       <button
-          className="job-expand-button"
+          className="caq-button"
           onClick={() => navigate("/addquestion")}
         >
           Add Question

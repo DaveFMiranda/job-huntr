@@ -44,12 +44,12 @@ const UpdateJobForm = ({jobId}) => {
      
       {Auth.loggedIn() ? (
         <>
-          <form onSubmit={handleFormSubmit}>
+          <form  className="form-background" onSubmit={handleFormSubmit}>
             <div className="form-group">
               <input
                 type="text"
                 name="company"
-                placeholder="Company Name"
+                placeholder={"Company Name"}
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 required
@@ -80,7 +80,7 @@ const UpdateJobForm = ({jobId}) => {
 
             <div className="form-group">
               <label>
-                Offer Made:
+                <span>Offer Made:</span>
                 <input
                   type="checkbox"
                   name="offerMade"

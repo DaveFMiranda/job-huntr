@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UPDATE_CONTACT_PERSON } from "../../utils/mutations";
 import { QUERY_JOB } from "../../utils/queries";
-
+import { LuUserPlus as UserIcon } from "react-icons/lu";
 
 import Auth from "../../utils/auth";
 
@@ -44,11 +44,15 @@ const UpdateContactPersonForm = ({_id}) => {
   };
 
   return (
-    <div>
-      <h3>Update This Contact Person</h3>
+    <div className="contact-form-container">
+     <div className="magnify-icon">
+          <h2>Update This Contact Person </h2>
+          &nbsp; <UserIcon />
+        </div>
       {Auth.loggedIn() ? (
         <>
-          <form onSubmit={handleFormSubmit}>
+        
+          <form className="form-background" onSubmit={handleFormSubmit}>
             <div className="form-group">
               <input
                 type="text"
@@ -96,7 +100,7 @@ const UpdateContactPersonForm = ({_id}) => {
             </div>
 
             <div className="form-group">
-              <button className="btn btn-primary" type="submit">
+              <button className="update-contact-person-button" type="submit">
                 Update Contact Person
               </button>
             </div>

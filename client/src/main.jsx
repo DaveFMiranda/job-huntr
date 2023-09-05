@@ -5,18 +5,15 @@ import App from "./App.jsx";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Profile from "./pages/READONLYProfile";
 import ErrorPage from "./pages/ErrorPage";
 import AboutPage from "./pages/AboutPage.jsx";
 import CompanyPage from "./pages/CompanyPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import CommonQuestions from "./pages/CommonQuestions.jsx";
 import QuestionUpdate from "./components/QuestionUpdate/index.jsx";
-//test pages - DELETE IF NOT USING
 import FAQ from "./pages/FAQ.jsx";
 import AddQuestion from "./pages/AddQuestion.jsx";
 import JobTracker from "./pages/JobTracker.jsx";
-import Jobs from "./pages/Jobs.jsx";
 import Job from "./components/Job";
 
 const router = createBrowserRouter([
@@ -46,7 +43,6 @@ const router = createBrowserRouter([
         path: "/CommonQuestions",
         element: <CommonQuestions />,
       },
-      // wireframe pages - DELETE IF NOT USING
       { path: "/FAQ", element: <FAQ /> },
       { path: "/AddQuestion", element: <AddQuestion /> },
       { path: "/JobTracker", element: <JobTracker /> },
@@ -55,8 +51,7 @@ const router = createBrowserRouter([
         element: <Job />,
       },
 
-      { path: "/Jobs", element: <Jobs /> },
-      //
+    
       {
         path: "/signup",
         element: <Signup />,
@@ -68,10 +63,6 @@ const router = createBrowserRouter([
       {
         path: "/updatequestion/:id",
         element: <QuestionUpdate />,
-      },
-      {
-        path: "/me",
-        element: <Profile />,
       },
     ],
   },

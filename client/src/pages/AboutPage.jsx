@@ -21,17 +21,9 @@ const AboutPage = () => {
           </div>
           <div className="dev-creds">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-              odio, obcaecati molestiae consequuntur corporis earum voluptatem
-              labore, perspiciatis qui illo rem ex nemo optio! Corrupti
-              voluptatem quod eligendi et repellat! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Eligendi iusto aut quidem et dolorum
-              labore nisi atque, sit tempore quam cupiditate obcaecati
-              doloremque odit quis harum? Odio eligendi rerum quis?Lorem ipsum
-              dolor sit amet consectetur adipisicing elit. Reiciendis numquam
-              distinctio optio suscipit, sint saepe dolorum. Cupiditate,
-              asperiores laudantium quo voluptatum odio harum, veniam ullam
-              suscipit odit placeat laborum molestias!
+            Hello, and welcome! My name is <span>Hailey</span>. I am mom to one very energetic seven year old, committed partner to the love of my life, and OG Swiftie. My love of learning has led me on a journey rich in information ranging from my time studying Mathematics and Spanish in my undergraduate programs, Change Systems in my graduate program and most recently, software engineering.</p>
+<p>10 years in education has empowered me with the resilience and determination needed to produce clear, efficient and scalable code. I am well versed in solving complex problems through the collaboration of ideas and diverse experience. What has drawn me to programming is the vastness in possibility.</p>
+<p>What has helped me persist is the work I have accomplished alongside veteran and emerging developers. What I can dream up pales in comparison to what the collective can envision and, together, accomplish. My collaborative skills are an asset in navigating complex technical problems. My resourcefulness enhances my adaptability as new needs require creative trouble-shooting. More than all of this, my commitment to continuous learning and improvement serves as the cornerstone for my professional growth.
             </p>
             <ul>
               <li>

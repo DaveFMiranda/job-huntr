@@ -8,6 +8,7 @@ import UpdateContactPersonForm from "../UpdateContactPersonForm";
 import { DELETE_CONTACT_PERSON } from "../../utils/mutations";
 import { useParams } from "react-router-dom";
 import { PiMagnifyingGlassBold as MagnifyIcon } from "react-icons/pi";
+import { LuUser } from "react-icons/lu";
 
 //////////////////////////////////////////////////////////
 
@@ -17,10 +18,9 @@ const Job = () => {
   const [addContactPersonButton, setAddContactPersonButton] = useState(false);
 
   const [updatedContactId, setUpdatedContactId] = useState(null);
-  const [deleteContact] = useMutation(DELETE_CONTACT_PERSON, {refetchQueries: [
-    QUERY_JOB,
-    'job'
-  ]});
+  const [deleteContact] = useMutation(DELETE_CONTACT_PERSON, {
+    refetchQueries: [QUERY_JOB, "job"],
+  });
 
   const handleContactUpdate = (_id) => {
     setUpdatedContactId(_id);
@@ -53,20 +53,21 @@ const Job = () => {
           <h2>Details </h2>
           &nbsp; <MagnifyIcon />
         </div>
-        <p>
-          <span>Advertised Salary:</span> {job.advertisedSalary}
+        
+        <p className="job-info-row">
+          <span>Advertised Salary:</span> <span>{job.advertisedSalary}</span>
         </p>
-        <p>
-          <span>Offer made?</span> {job.offerMade}
+        <p className="job-info-row">
+          <span>Offer made?</span> <span>{job.offerMade}</span>
         </p>
-        <p>
-          <span>Created At:</span> {formatTimestamp(job.createdAt)}
+        <p className="job-info-row">
+          <span>Created At:</span><span>{formatTimestamp(job.createdAt)}</span>
         </p>
-        <p>
-          <span>Updated At:</span> {formatTimestamp(job.updatedAt)}
+        <p className="job-info-row">
+          <span>Updated At:</span> <span>{formatTimestamp(job.updatedAt)}</span>
         </p>
         <button
-          className="add-question"
+          className="add-question-button"
           onClick={() => setAddContactPersonButton(!addContactPersonButton)}
         >
           Update Contact
@@ -74,26 +75,42 @@ const Job = () => {
         {addContactPersonButton && <ContactPersonForm jobId={jobId} />}
         {job.contactPerson && (
           <div>
-            <p>Contact Person:</p>
-            <p>Name: {job.contactPerson.name}</p>
-            <p>Role: {job.contactPerson.role}</p>
-            <p>Phone: {job.contactPerson.phone}</p>
-            <p>Email: {job.contactPerson.email}</p>
-            <p>Notes: {job.contactPerson.notes}</p>
-
+            <div className="LuUser">
+              <h2>Contact Person </h2>
+              &nbsp; <LuUser />
+            </div>
+            <h5><span>Below is the current company contact</span></h5>
+            <div className="single-job-current">
+            <p className="job-info-row">
+              <span>Name:</span> <span>{job.contactPerson.name}</span>
+            </p>
+            <p className="job-info-row">
+              <span>Role:</span> <span>{job.contactPerson.role}</span>
+            </p>
+            <p className="job-info-row">
+              <span>Phone:</span> <span>{job.contactPerson.phone}</span>
+            </p>
+            <p className="job-info-row">
+              <span>Email:</span> <span>{job.contactPerson.email}</span>
+            </p>
+            <p className="job-info-row">
+              <span>Notes:</span> <span>{job.contactPerson.notes}</span>
+            </p>
+            </div>
+            
             <button
               className="contact-update-button"
               onClick={() => handleContactUpdate(job.contactPerson._id)}
               style={{}}
             >
-              Update This Contact
+              Update Contact
             </button>
             <button
               className="contact-delete-button"
               onClick={() => handleContactDelete(job.contactPerson._id, jobId)}
               style={{}}
             >
-              Delete This Contact
+              Delete Contact
             </button>
           </div>
         )}

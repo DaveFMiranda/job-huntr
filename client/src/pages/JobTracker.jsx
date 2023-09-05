@@ -57,7 +57,6 @@ const JobTracker = () => {
     <div className="page-container">
       <h3 className="page-header">
         Job Tracker
-        {/* Viewing {userParam ? `${user.username}'s` : "your"} saved jobs */}
       </h3>
       <table className="jobs">
         <tr>

@@ -5,11 +5,7 @@ import JobForm from "../components/JobForm";
 const Home = () => {
   return (
     <main>
-      {/* <div className="content-container">
-        <div className="form" style={{ border: "1px dotted #1a1a1a" }}>
-          
-        </div>
-      </div> */}
+<h2>Welcome to <span>Job Huntr</span></h2>
     </main>
   );
 };

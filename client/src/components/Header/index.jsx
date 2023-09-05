@@ -11,7 +11,7 @@ const Header = () => {
     <header className="header-container">
       <div className="header-box">
         <div className="header-title">
-          <Link className="text-light" to="/">
+          <Link className="text-light" to="/JobTracker">
             <img src={Logo} alt="Job Huntr" />
           </Link>
           <p>Job search made easy!</p>
@@ -19,7 +19,7 @@ const Header = () => {
         <div className="navbar-button">
           {Auth.loggedIn() ? (
             <>
-              <Link className="profile-button" to="/">
+              <Link className="profile-button" to="/JobTracker">
                 Home
               </Link>
 

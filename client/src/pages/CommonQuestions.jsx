@@ -11,7 +11,10 @@ const CommonQuestions = () => {
   const [response, setResponse] = useState("");
   const [addedQuestions, setAddedQuestions] = useState([]);
   const { loading, data } = useQuery(QUERY_QUESTION);
-  const [addQuestion, { error }] = useMutation(ADD_QUESTION);
+  const [addQuestion, { error }] = useMutation(ADD_QUESTION, {refetchQueries: [
+    QUERY_QUESTION,
+    'questions'
+  ]});
 
   if (loading) return <p>Loading...</p>;
 

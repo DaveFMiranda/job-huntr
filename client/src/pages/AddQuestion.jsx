@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { ADD_QUESTION } from "../utils/mutations";
+import {QUERY_QUESTION} from "../utils/queries"
 import Auth from "../utils/auth";
 
 const AddQuestion = () => {

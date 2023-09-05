@@ -46,7 +46,6 @@ export const QUERY_QUESTION = gql`
       _id
       question
       response
-      
     }
   }
 `;
